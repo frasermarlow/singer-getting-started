@@ -51,9 +51,9 @@ If you are planning on setting up a data flow for your company, or something tha
 * Head over to the AWS management console ( https://aws.amazon.com/console/ ) and create a free AWS account or log in if you have one already.  You will need a credit card for this, but Amazon will confirm “We use your payment information to verify your identity and only for usage in excess of the AWS Free Tier Limits. We will not charge you for usage below the AWS Free Tier Limits.” – this demo should not incur any charges on your credit card.
 * Enter a cellphone number for identification purposes.
 * Select the ‘free tier’ account
-* You will be limited to very small virtual machines.  Not to worry, Singer will run just fine, if not a bit slowly, on these ‘micro’ instances.
+* You will be limited to very small virtual machines.  Not to worry, Singer will run just fine, if not a bit slowly, on these ‘_micro_’ instances.
 
-Once your account is set up head over to the Web Management Console.  You should see a section called _“Build a solution: Get started with simple wizards and automated workflows. Launch a virtual machine with EC2 (2-3 minutes)”_.  If you cannot locate that just click on the ‘_Services_’ menu item in the page header, then select ‘_EC2_’ under ‘_Compute_’.
+Once your account is set up head over to the **[Web Management Console](https://aws.amazon.com/console/)**.  You should see a section called _“Build a solution: Get started with simple wizards and automated workflows. Launch a virtual machine with EC2 (2-3 minutes)”_.  If you cannot locate that just click on the ‘_Services_’ menu item in the page header, then select ‘_EC2_’ under ‘_Compute_’.
 
 ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_2.png)
  
@@ -67,7 +67,7 @@ On the next screen (“_Step 2: Choose an Instance Type_”) you will only have 
 
 Next, we need to set up the **security group** for this server.  Security groups contain all the rules for who can access this virtual computer, and what protocols they can use.  This may seem like another painful step in setting things up, but you only need to do this once.  If you ever want to set up another virtual machine or scrap and restart the current one, the security groups stay in place.
 
-AWS will give you a default security group called ‘launch-wizard-1’ which you can rename if you like.  
+AWS will give you a default security group called ‘_launch-wizard-1_’ which you can rename if you like.  
 
 By default, the security group will allow all outbound traffic from the server, but will restrict inbound traffic to just SSH traffic on port 22.
 
@@ -87,9 +87,7 @@ Here, take a note of the public IP of the machine, we will soon be needing that.
 
 ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_8.png)
  
-Now it is time to connect to your new EC2 instance.
-
-To connect to an EC2 instance we will use SSH (Secure SHell is a secure networking protocol for connecting to a remote computer.) 
+Now it is time to connect to your new EC2 instance. For this we will use SSH (Secure SHell is a secure networking protocol for connecting to a remote computer.)
 
 In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter)
 
@@ -113,8 +111,10 @@ Here is an example of what the command would look like with those variables plug
 
 The first time you connect you will be presented with a warning message along these lines:
 
-> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established. 
+> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
+
 > ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y. 
+
 > Are you sure you want to continue connecting (yes/no)? 
 
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
@@ -130,7 +130,6 @@ This is what we expect, as the secure connection has never been established befo
 3.	Click Next.
 4.	Give the shortcut a name.
 5.	Click Finish
-
 You will now have a handy-dandy shortcut on your desktop: ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_10.png)
 
 ### Working in Ubuntu
@@ -254,6 +253,7 @@ Go grab a coffee - this will take a while.  Once this is complete run
 And you will see the Python versions now available to us.  All being well it will say:
 
 > \* system (set by /home/ubuntu/.pyenv/version)
+
 > 3.5.3
 
 
@@ -285,9 +285,7 @@ There we go.  The tap is installed.  Now to run it, we would not call the progra
 
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`
 
-Of course, right now that command won’t do anything as we don’t have a destination yet.  
-
-If you try it, you will get the error:
+Of course, right now that command won’t do anything as we don’t have a destination yet. If you try it, you will get the error:
 
 > tap-autopilot: error: the following arguments are required: -c/--config
 
@@ -313,9 +311,9 @@ This just means ‘change the current active directory to my home folder’.
 
 Now let’s create a folder for our config files.  You can pick whichever folder name you like.
 
-`$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’`
+`$ mkdir tap-autopilot-config  	# make the directory called ‘tap-autopilot-config’`
 
-`$ cd tap-autopilot-config     #  enter that directory`
+`$ cd tap-autopilot-config     	#  enter that directory`
 
 In this folder we are going to create several files that the tap will use to set the parameters for the data import.  The first one (which is required) is the environment variables for the Tap, namely what access token to use to access my Autopilot instance.  As per the tap instructions, we will need to create a small file in JSON format called ‘config.json’ with the following details:
 
@@ -356,13 +354,19 @@ Let me break that command down a bit for you:
 ` > ~/tap-autopilot-config/catalog.json`		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
 
 All being well this command will result in the following message:
+
 > INFO Loading Schemas
+
 > INFO Loading schema for contacts
+
 > INFO Loading schema for lists
+
 > INFO Loading schema for smart_segments
+
 > INFO Loading schema for smart_segments_contacts
 
-As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘**Singer Discover Utility**’ found here: [https://github.com/chrisgoddard/singer-discover](https://github.com/chrisgoddard/singer-discover). It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
+
+_As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘**Singer Discover Utility**’ found here: [https://github.com/chrisgoddard/singer-discover](https://github.com/chrisgoddard/singer-discover). It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include._
 
 So that all looks good. We can check that we now have a ‘_catalog.json_’ file in our folder by running:
 
@@ -370,11 +374,11 @@ So that all looks good. We can check that we now have a ‘_catalog.json_’ fil
 
 And this will return the following:
 
-> total 40
-> drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .
-> drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..
-> -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json
-> -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json
+> total 40	
+> drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .	
+> drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..	
+> -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json	
+> -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json	
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
 
