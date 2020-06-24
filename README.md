@@ -1,7 +1,7 @@
 # Singer: Getting Started Guide
 
 ## Table of Contents
-### A: Running Singer on AWS EC2
+### A: Running Singer on AWS EC2 (using a PC)
 
 Part 1: [Setting up your AWS EC2 instance](#Introduction)
 
@@ -36,6 +36,7 @@ So how much expertise is required to work your way through this tutorial?  Let m
 * You will need a credit card for authorization purposes, but don’t worry – you don’t need to spend a dime to complete this tutorial.
 
 ## Part 1: Setting up your AWS EC2 instance.
+These instructions assume you are working on a PC to manage your EC2 instance, but you could equally follow along on a Mac.
 
 ### Why use EC2?
 
