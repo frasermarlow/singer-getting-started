@@ -600,13 +600,11 @@ So that all looks good. We can check that we now have a ‘catalog.json’ file 
 `$ ls -la`
 And this will return the following:
 
-> total 40 \n
- drwxrwxr-x 2 ___________ ___________  4096 Jun 17 17:32 .
-
-> drwxr-xr-x 8 ___________ ___________  4096 Jun 17 16:05 .. \n
-
-> -rw-rw-r-- 1 ___________ ___________ 27189 Jun 17 17:32 catalog.json \n
-> -rw-rw-r-- 1 ___________ ___________    96 Jun 17 16:08 config.json \n
+> total 40  
+> drwxrwxr-x 2 ___________ ___________  4096 Jun 17 17:32 .  
+> drwxr-xr-x 8 ___________ ___________  4096 Jun 17 16:05 ..  
+> -rw-rw-r-- 1 ___________ ___________ 27189 Jun 17 17:32 catalog.json  
+> -rw-rw-r-- 1 ___________ ___________    96 Jun 17 16:08 config.json  
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with
  
