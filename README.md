@@ -2,11 +2,14 @@
 
 ## Table of Contents
 ### A: Running Singer on AWS EC2
-Part 1: [Setting up your AWS EC2 instance](#Why-use-EC2)
-Part 2: Setting up the environment
-Part 3: Installing, and then running the tap and the target
 
-### B: Running Singer on Mac OS
+Part 1: [Setting up your AWS EC2 instance](#Introduction)
+
+Part 2: [Setting up the environment](#singer-assumptions)
+
+Part 3: [Installing, and then running the tap and the target](#six-steps-to-a-happy-tap)
+
+### B: [Running Singer on Mac OS](#taps-targets-and-python)
 
 ------------------------------------------------------
 
@@ -135,7 +138,7 @@ In the Windows command prompt interface we are using, ‘paste’ does not work.
 Also in BASH, anything after the hash character (`#`) is a comment.  I will occasionally add those after a command to add context.
 
 ### Part 2: Setting up the environment.
-
+#### Singer assumptions
 There are a few assumptions in the official Singer documentation that we need to tackle.
 
 First, there is an assumption that you already have a fully featured development environment running.  Singer depends on a bunch of other programs or modules that we need to install before Singer will work on our machine.
@@ -240,7 +243,7 @@ And you will see the Python versions now available to us.  All being well it wil
 
 
 ### Part 3: Installing, and then running the tap and the target
-
+#### Six steps to a happy tap
 In order to install either a Tap or a Target, we follow these steps:
 
 1)	Create a virtual environment for the Tap or Target
@@ -435,6 +438,7 @@ If you want to explore JSON file structures , http://www.bodurov.com/JsonFormatt
 
  
 # Running Singer on Mac OS
+#### Taps, Targets and Python
 
 Running Taps and Targets locally on a Mac is probably the most common scenario for testing and development, but getting Singer to work does require some set up.
 
