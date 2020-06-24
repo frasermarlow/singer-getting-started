@@ -1,32 +1,20 @@
 # Singer: Getting Started Guide
 
-# Table of Contents
-![](http://frasermarlow.com/wp-content/uploads/2016/06/Screenshot-from-2016-06-11-213341-e1465695470792.png)
-
-[Part 1: Setting up your AWS EC2 instance. 2](#_Toc43831453)
-
+## Table of Contents
+### [Part 1: Setting up your AWS EC2 instance. 2](#_Toc43831453)
 [Setting up an EC2 instance: 3](#_Toc43831454)
-
 [Now it is time to connect to your new EC2 instance. 5](#_Toc43831455)
-
 [Working in Ubuntu 6](#_Toc43831456)
-
-[Part 2: Setting up the environment. 7](#_Toc43831457)
-
+### [Part 2: Setting up the environment. 7](#_Toc43831457)
 [First, let&#39;s get things up to date: 7](#_Toc43831458)
-
 [Now, let us set up Python 8](#_Toc43831459)
-
 [OK, NOW can we install python? 8](#_Toc43831460)
-
-[Part 3: Installing, and then running the tap and the target 9](#_Toc43831461)
-
-[Additional resources: 14](#_Toc43831462)
-
+### [Part 3: Installing, and then running the tap and the target 9](#_Toc43831461)
+[Additional resources: 14](#_Toc43831462
 [Running Singer on Mac OS 16](#_Toc43831463)
 
-[NOTES: 23](#_Toc43831464)
 
+### Introduction
 Singer.io is a great framework for creating reliable data flows, to get data from point A to point B. But if you are not an experienced data engineer or software developer, it is easy to hit a few stumbling blocks early in the process. These teething issues are enough to make most data scientists or data analysts give up on Singer and go look for a more consumer-friendly solution ([which is what Stitch is all about](https://www.stitchdata.com/).)
 
 But don&#39;t give up just yet. The goal of this guide is to help those of you who – like me – are new to Singer. You may even be new to Python in general. The steps below will help you get a Singer Tap and a Singer Target up and running.
