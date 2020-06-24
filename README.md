@@ -53,6 +53,8 @@ If you are planning on setting up a data flow for your company, or something tha
 * You will be limited to very small virtual machines.  Not to worry, Singer will run just fine, if not a bit slowly, on these ‘micro’ instances.
 
 Once your account is set up head over to the Web Management Console.  You should see a section called _“Build a solution: Get started with simple wizards and automated workflows. Launch a virtual machine with EC2 (2-3 minutes)”_.  If you cannot locate that just click on the ‘_Services_’ menu item in the page header, then select ‘_EC2_’ under ‘_Compute_’.
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_2.png)
  
 You will now be asked to select the type of virtual machine you want to launch.  Just make sure you pick one marked “_Free tier eligible_”.  For this exercise I am selecting an **Ubuntu Server 20.04 LTS 64-bit (x86)**.
  
