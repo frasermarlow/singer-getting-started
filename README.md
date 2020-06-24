@@ -96,7 +96,7 @@ Here, take a note of the public IP of the machine, we will soon be needing that.
  
 Now it is time to connect to your new EC2 instance. For this we will use SSH (Secure SHell is a secure networking protocol for connecting to a remote computer.)
 
-In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter)
+In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter).  A primer for [using SSH on Mac can be found here](https://osxtips.net/how-to-use-ssh-on-mac/).
 
 Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`
 
