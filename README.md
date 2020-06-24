@@ -101,8 +101,8 @@ Here is an example of what the command would look like with those variables plug
 The first time you connect you will be presented with a warning message along these lines:
 
 > The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
-> ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
-> Are you sure you want to continue connecting (yes/no)?
+ ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
+ Are you sure you want to continue connecting (yes/no)?
 
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
 
