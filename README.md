@@ -2,13 +2,20 @@
 
 ## Table of Contents
 ### Running Singer on AWS EC2
+
 Part 1: Setting up your AWS EC2 instance
+
 Part 2: Setting up the environment
+
 Part 3: Installing, and then running the tap and the target
+
 ### Running Singer on Mac OS
 
 Singer.io is a great framework for creating reliable data flows, to get data from point A to point B.  But if you are not an experienced data engineer or software developer, it is easy to hit a few stumbling blocks early in the process.  These teething issues are enough to make most data scientists or data analysts give up on Singer and go look for a more consumer-friendly solution (which is what Stitch is all about.) 
-But don’t give up just yet.  The goal of this guide is to help those of you who – like me – are new to Singer. You may even be new to Python in general.  The steps below will help you get a Singer Tap and a Singer Target up and running.
+
+But don’t give up just yet.  The goal of this guide is to help those of you who – like me – are new to Singer. You may even be new to Python in general.  
+The steps below will help you get a Singer Tap and a Singer Target up and running.
+
 The Singer documentation assumes a lot of familiarity with Python environments and versions, so I am going to slow things down a touch and walk you through the set-up of the environment in a bit more detail.
 
 As part of this tutorial, I will show you how to:
@@ -27,10 +34,12 @@ So how much expertise is required to work your way through this tutorial?  Let m
 ## Part 1: Setting up your AWS EC2 instance.
 
 As mentioned above, you can run Singer on a local PC or Mac.  As long as you can run Python 3 on your machine you should be able to skip this set up and move on to the next section if you like. But personally I like to work with AWS EC2 instances.  EC2 stands for ‘Amazon Elastic Compute Cloud’ and is a service where you can boot up a virtual computer on the cloud, log into it using SSH and run applications using the Shell command line interface.
+
 EC2 instances are stand-alone, free for 12 month (for the really small instances) and if things fall apart you can just terminate an instance and boot up a fresh one in a couple of minutes.  In fact, in writing this tutorial I terminated my EC2 instance several times and just rebooted a new one.  (Note that while this only take a couple of minutes, the new server’s IP address may well change, and you will need to update your connection details.)
 
 If you are planning on setting up a data flow for your company, or something that will run on a schedule then having a stand-alone EC2 virtual machine run the Singer tap has many advantages.  It is good for sandboxing, and programs install quickly by virtue of being on the AWS network.  On the downside, the free instances are very small, so they will run taps very slowly.  This said, once your tap is working as wanted, you can just scale up the instance you are working on – no need to go and rebuild everything a second time.
-Setting up an EC2 instance:
+
+### Setting up an EC2 instance:
 
 * Head over to the AWS management console ( https://aws.amazon.com/console/ ) and create a free AWS account or log in if you have one already.  You will need a credit card for this, but Amazon will confirm “We use your payment information to verify your identity and only for usage in excess of the AWS Free Tier Limits. We will not charge you for usage below the AWS Free Tier Limits.” – this demo should not incur any charges on your credit card.
 * Enter a cellphone number for identification purposes.
@@ -39,11 +48,11 @@ Setting up an EC2 instance:
 
 Once your account is set up head over to the Web Management Console.  You should see a section called _“Build a solution: Get started with simple wizards and automated workflows. Launch a virtual machine with EC2 (2-3 minutes)”_.  If you cannot locate that just click on the ‘_Services_’ menu item in the page header, then select ‘_EC2_’ under ‘_Compute_’.
  
-You will now be asked to select the type of virtual machine you want to launch.  Just make sure you pick one marked “_Free tier eligible_”.  For this exercise I am selecting an Ubuntu Server 20.04 LTS 64-bit (x86).
+You will now be asked to select the type of virtual machine you want to launch.  Just make sure you pick one marked “_Free tier eligible_”.  For this exercise I am selecting an **Ubuntu Server 20.04 LTS 64-bit (x86)**.
  
-On the next screen (“_Step 2: Choose an Instance Type_”) you will only have one choice that is ‘_free tier_’ eligible, namely the t2 micro.  From here, just click ‘_review and launch_’.
+On the next screen (“_Step 2: Choose an Instance Type_”) you will only have one choice that is ‘_free tier_’ eligible, namely the **t2 micro**.  From here, just click ‘_review and launch_’.
  
-Next, we need to set up the security group for this server.  Security groups contain all the rules for who can access this virtual computer, and what protocols they can use.  This may seem like another painful step in setting things up, but you only need to do this once.  If you ever want to set up another virtual machine or scrap and restart the current one, the security groups stay in place.
+Next, we need to set up the **security group** for this server.  Security groups contain all the rules for who can access this virtual computer, and what protocols they can use.  This may seem like another painful step in setting things up, but you only need to do this once.  If you ever want to set up another virtual machine or scrap and restart the current one, the security groups stay in place.
 
 AWS will give you a default security group called ‘launch-wizard-1’ which you can rename if you like.  
 
@@ -62,12 +71,19 @@ Here, take a note of the public IP of the machine, we will soon be needing that.
 Now it is time to connect to your new EC2 instance.
 
 To connect to an EC2 instance we will use SSH (Secure SHell is a secure networking protocol for connecting to a remote computer.) 
+
 In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter)
+
 Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`
+
 `ssh -i <path-to-pem> -v ubuntu@<server-ip>`
+
 So what is going on here?  In essence, you are instructing windows to use `ssh` to connect as user ‘ubuntu’ to the computer found at `<server-ip>`  using the Key file `<path-to-pem>`
+
 So where do we get these two variables?  Well `<path-to-pem>` is the file location of the _.pem_ key file we saved.  You may have simply saved it in your ‘_downloads_’ folder, but it’s usually a good idea to save it somewhere specific on your computer.
+
 `<server-ip>` is the public IP of the EC2 machine you are connecting to.  This is the IP we took note of earlier.
+
 In case you were wondering, the ‘-I’ and the ‘-v’ simply tell SSH that the next item in the command will be the .pem file and the server location respectively.  So you could equally run the command as 
 
 `ssh -v ubuntu@<server-ip> -i <path-to-pem>`
@@ -77,12 +93,15 @@ Here is an example of what the command would look like with those variables plug
 `ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
 
 The first time you connect you will be presented with a warning message along these lines:
+
 > The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
 > ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
 > Are you sure you want to continue connecting (yes/no)?
+
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘yes’ and proceed.
 
 Quick tip on PC:  The steps above are great for connecting to your server once.  Since you will likely be connecting often, I suggest setting this up as a shortcut.
+
 1. Right-click anywhere in File Explorer or the Desktop and select **New** > **Shortcut**.
 2. For the location of the item, type in `C:\Windows\System32\cmd.exe /k <the SSH command above>`
 	So for example, the ‘location’ box would contain the following: 
@@ -94,20 +113,30 @@ Quick tip on PC:  The steps above are great for connecting to your server once. 
 You will now have a handy-dandy shortcut on your desktop:
 
 ### Working in Ubuntu
+
 Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  In the default set up (such as the one we walked through above) you will be logged on as the generic user called ‘*ubuntu*’.  This is why you will see prompt look something like this:
+
 `ubuntu@ip-123-31-11-123:~$`
+
 The tilde (~) indicates that you are in this user’s home directory.
 Ubuntu is a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required
 In the following sections, the following apply:
 Any line that looks like this:
+
 `$ cd ~`
+
 Is a command you can execute in Ubuntu’s command line.  Simply copy and paste the instruction in, without the ‘$’ – so in the example above just type or copy/paste ‘ cd~ ’
+
 In the Windows command prompt interface we are using, ‘paste’ does not work.  Once you copy a command from this tutorial, you can typically use the right hand-mouse button to paste into the command window.
+
 Also in BASH, anything after the hash character (‘#’) is a comment.  I will occasionally add those after a command to add context.
 
 ### Part 2: Setting up the environment.
+
 There are a few assumptions in the official Singer documentation that we need to tackle.
+
 First, there is an assumption that you already have a fully featured development environment running.  Singer depends on a bunch of other programs or modules that we need to install before Singer will work on our machine.
+
 The second thing to tackle is this: the documentation ‘recommends’ using what are called ‘virtual environments’ for running each tap or target.  A virtual environment ( or ‘_venv_’ for short) is a way of running individual programs in their own little bubble, calling on their own little subset of programs.  So you might have a Tap that needs version 3.1 of a module, but the Target is asking for version 4.3.  The virtual environment allows for them each to maintain their own set of preferences.
 
 In truth, using virtual environments is a requirement, not a nice to have.  Things just will not work if you try to run everything in the same environment.  This makes things a bit more convoluted, but not at all unmanageable.  You will get used to it quickly.
@@ -115,34 +144,55 @@ In truth, using virtual environments is a requirement, not a nice to have.  Thin
 First, let’s get things up to date:
 
 When you install a new EC2 instance you are not necessarily getting the most recent version of things, so first let’s run an update.
+
 `$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
 This will run three sequential commands to find all out of date packages, download the required updates and then install them.  You may need to agree to some installs as they will use up some of your ‘hard drive’ on the cloud.  This step may take a little while.
 Sometimes, we use Git to install the Taps and Targets we want to use, and Git may not yet be installed in your environment, so let’s do that now:
+
 `$ sudo apt install git`
+
 Once your tap and target are running you will want to run it on a schedule.  For this we use Cron.  So let’s install that while we are at it:
+
 `$ sudo apt-get install cron`
+
 Again, you might find it is already on your system, in which case you are all set.
+
 Finally, let’s run 
+
 `$ sudo apt install -y pylint`
+
 This installs a code analysis tool we will use to make sure taps and targets are working OK.
+
 Now, let us set up Python
+
 Most computers will come with Python pre-installed.  It is a very popular programming language.  The Ubuntu instance we set up above for example comes preinstalled with version 3.8.2.  We know this because running the command 
+
 `$ python3 --version`
+
 Returns the following:
+
 > Python 3.8.2
+
 Singer runs on Python 3.5.2, but I have found that installing that specific version returns OpenSSL issues.  The issue was fixed in the 3.5.3 release, so it’s a low risk approach to go with that incremental version.
+
 But in addition to Python we are going to need the development libraries, so let us install those first:
+
 `$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
 
 `$ sudo apt-get install -y python3-dev libssl-dev`
 
 **OK, NOW can we install python?**
+
 Sure.  Well no.  Not yet.  To run Singer we need to use virtual environments.  Let me explain what those are quickly.
+
 When a program runs in Python (or any other operating system) it calls on a bunch of other programs.  Each one of these individual programs is individually managed and upgraded.  So at one point in time, using a specific combination of these modules, a developer got the core program to work.
+
 But if any one of these modules is on a different version on your machine you will run into the dreaded dependency errors.
 To protect from that we create a virtual environment.  All programs operating in that virtual environment will call on a specific set of versions for any required module.
+
 So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment.  It’s not as complicated as it sounds… bear with me.
+
 First let’s install the module that allows us to manage versions of Python and these virtual environments.  Virtual environments are managed with ‘venv’ whereas Python versions are managed with ‘pyenv’. pyenv is a collection of shell scripts and not installable with pip so we use this instead:
 
 `$ sudo apt-get install -y python3-venv`
@@ -151,7 +201,8 @@ First let’s install the module that allows us to manage versions of Python and
 
 As the second installation completes, you will see a message that says “ Load pyenv automatically by adding the following to ~/.bashrc:”  … followed by a command.   ‘bashrc’ is a set of commands that Bash will run on startup.  So we need to edit this file (~/.bashrc) to add a few lines.  An easy way to do that is to run the following commands, in this order, one at a time:
 
-```$ echo '' >> ~/.bashrc
+```
+$ echo '' >> ~/.bashrc
 $ echo 'export PATH="/home/ubuntu/.pyenv/bin:$PATH"' >> ~/.bashrc
 $ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 $ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
@@ -159,6 +210,7 @@ $ exec "$SHELL"
 ```
 
 I promise we are getting close to installing Python in a virtual environment!
+
 Let’s see what versions we can install.  Run this command: 
 
 `$ pyenv install --list | grep " 3\.[5]"`
@@ -184,14 +236,17 @@ And you will see the Python versions now available to us.  All being well it wil
 ### Part 3: Installing, and then running the tap and the target
 
 In order to install either a Tap or a Target, we follow these steps:
+
 1)	Create a virtual environment for the Tap or Target
 2)	Activate that virtual environment.  You will notice the command prompt changes to indicate the virtual environment you are operating in.
 3)	Specify the version of Python we will use in this environment
 4)	Install ‘pip’ and ‘wheel’ which are package managers that will allow us in turn to install the Tap or Target.
 5)	Install the Tap or Target using pip
 6)	Close out of the virtual environment.
+
 Once these steps are complete, we will be in a position to run the Tap or Target by calling for it in its virtual environment. 
-So here are what these six steps look like in practice. In this example I am going to use `tap-autopilot` which is an email automation platform.  Depending on the tap you select, you will have to swap out tap-autopilot in the steps below with your Tap’s reference as found at https://www.singer.io/:
+
+So here are what these six steps look like in practice. In this example I am going to use `_tap-autopilot_` which is an email automation platform.  Depending on the tap you select, you will have to swap out tap-autopilot in the steps below with your Tap’s reference as found at [https://www.singer.io/](https://www.singer.io/):
 
 ```
 $ python3 -m venv ~/.virtualenvs/tap-autopilot      # create a virtual environment specific to this tap
@@ -201,9 +256,13 @@ $ pip install --upgrade pip wheel
 $ pip install tap-autopilot
 $ deactivate
 ```
+
 There we go.  The tap is installed.  Now to run it, we would not call the program directly, but call it’s virtual environment as follows:
+
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`
+
 Of course, right now that command won’t do anything as we don’t have a destination yet.  
+
 If you try it, you will get the error:
 
 > tap-autopilot: error: the following arguments are required: -c/--config
@@ -220,9 +279,14 @@ $ deactivate
 ```
 
 So we now have a Tap and a Target installed.  Now we need to configure the Tap.  Each Tap can be a bit different, and I recommend visiting the Github repo for the tap you are working with.  In my case that would be [https://github.com/singer-io/tap-autopilot](https://github.com/singer-io/tap-autopilot) - but you can find the link for your specific Tap on the Singer.io website, or by googling “_singer-io tap-name_” – for example “[_singer-io tap-adwords_](https://www.google.com/search?q=singer-io+tap-adwords)”.
+
+
 Let’s create a folder where we can keep our configuration files organized.  First let us just make sure you are in the root directory, so just run this:
+
 `$ cd ~     # return to the home directory`
+
 This just means ‘change the current active directory to my home folder’.
+
 Now let’s create a folder for our config files.  You can pick whichever folder name you like.
 
 `$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’`
@@ -241,6 +305,7 @@ In this folder we are going to create several files that the tap will use to set
 Logging into the application, I locate the API key in the Settings section.
  
 Now to create the file, back on the EC2 instance we use ‘nano’ (the text editor) to create the file:
+
 `$ nano config.json`
 
 and paste in (right mouse click) 
@@ -253,7 +318,7 @@ and paste in (right mouse click)
 ```
 
 The next step is to run the Tap in ‘_discovery mode_’.  What this means is that we are going to ask the Tap to connect to its source and figure out what data can be retrieved.  This will allow us to generate a ‘_catalog_’ file with all the data that we can pull from – in this case – the Autopilot system.  
-Once this catalog file is generated, we can tweak it to our purpose.  Using ‘discovery’ is much easier than trying to write our catalog from scratch.  So here is the command for doing this:
+Once this catalog file is generated, we can tweak it to our purpose.  Using ‘_discovery_’ is much easier than trying to write our catalog from scratch.  So here is the command for doing this:
 
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --discover  > ~/tap-autopilot-config/catalog.json`
 
@@ -265,7 +330,6 @@ Let me break that command down a bit for you:
 > > ~/tap-autopilot-config/catalog.json		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
 
 All being well this command will result in the following message:
-
 
 > INFO Loading Schemas
 > INFO Loading schema for contacts
@@ -315,10 +379,13 @@ In my case I browse through the catalog.json file until I find the steam’s ‘
 This done, exit the text editor with Cntl+X (answer ‘Y’ to save your changes). 
 
 We have one final configuration JSON file to create, and that is the ‘state’ file.  In essence the role of the ‘state’ file is to capture at the end of each data run the state of play, so that next time the tap-to-target dataflow runs, it can pick up where it left off.
+
 The thing is each tap will handle the ‘state’ a little bit differently, depending on how the team or individual developing the tap decided to implement things.
 
 In the case of tap-autopilot I am going to use the state.json file to tell the tap which date I want it to start importing data from.  Like the ‘select’ statement in catalog.json, is done for each ‘stream’ individually.
+
 Examining the catalog.json file, if you search for the key ‘tap_stream_id’ you will see that tap-autopilot pulls in four types of data: "_contacts_","_lists_","_smart_segments_", and "*smart_segments_contacts*".
+
 So to select the start date of each of these streams, we can specify the earliest date to match as follows.  Create the file with 
 
 `$ nano ~/tap-autopilot-config/state.json`
@@ -362,14 +429,20 @@ if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer 
 If you want to explore JSON file structures , http://www.bodurov.com/JsonFormatter/ is a useful tool.
 
  
-Running Singer on Mac OS
+## Running Singer on Mac OS
 
 Running Taps and Targets locally on a Mac is probably the most common scenario for testing and development, but getting Singer to work does require some set up.
+
 For instance, Mac OS X comes with Python 2.7 out of the box, but Singer runs on Python 3.5. and separate virtual environments are recommended for each Tap and Target you use.  But don’t worry, you do not need much familiarity with Python to get up and running.  The following guide should get you there.
+
 To work on Singer, we are going to use the Mac Terminal which comes with Mac OS by default.
+
 So let’s start by opening the command line Terminal (Finder > Applications > Terminal)
+
 First, we install Homebrew, the free software package management system which makes it easy to install all the other modules required to run Singer.
-$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+`$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
+
 (Note: Likely your Mac will already have Xcode installed, but if you run into issues installing Homebrew, that will likely be the cause. Xcode can be installed from the Apple Mac store.)
 While we are at it, we will install the software testing application PyLint
 $ brew install pylint
