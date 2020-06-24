@@ -57,17 +57,25 @@ Once your account is set up head over to the Web Management Console.  You should
 ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_2.png)
  
 You will now be asked to select the type of virtual machine you want to launch.  Just make sure you pick one marked “_Free tier eligible_”.  For this exercise I am selecting an **Ubuntu Server 20.04 LTS 64-bit (x86)**.
- 
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_3.png)
+
 On the next screen (“_Step 2: Choose an Instance Type_”) you will only have one choice that is ‘_free tier_’ eligible, namely the **t2 micro**.  From here, just click ‘_review and launch_’.
- 
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_4.png)
+
 Next, we need to set up the **security group** for this server.  Security groups contain all the rules for who can access this virtual computer, and what protocols they can use.  This may seem like another painful step in setting things up, but you only need to do this once.  If you ever want to set up another virtual machine or scrap and restart the current one, the security groups stay in place.
 
 AWS will give you a default security group called ‘launch-wizard-1’ which you can rename if you like.  
 
 By default, the security group will allow all outbound traffic from the server, but will restrict inbound traffic to just SSH traffic on port 22.
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_5.png)
  
 Click ‘_launch_’ and AWS will ask you to “_Select an existing key pair or create a new key pair._”.  A key pair is a set of two ‘_keys_’ – you can think of these as the lock that AWS will put on the server to keep it secure, and the key that we need to access the server.  Select ‘_create a new key pair_’ in the dropdown, and give it a relevant name.
- 
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_3.jpg)
+
 Then click ‘_download Key Pair_’ and keep the downloaded Key somewhere safe on your computer – if you lose the key to the server, you will no longer be able to access the machine.  As you will see the ‘_Key_’ is simply a text file with the file extension ‘_.pem_’.  If you open the file itself in a text editor you will see that it  starts with “-----BEGIN RSA PRIVATE KEY-----” and is followed by a long series of seemingly random characters, which constitute a long and very complex password for your server.
 
 You can now finally click ‘_Launch Instances_’ and AWS will boot up your brand new machine.
@@ -75,6 +83,8 @@ You can now finally click ‘_Launch Instances_’ and AWS will boot up your bra
 After a couple of minutes, your instance will be up and running – if you click ‘_view instances_’ or simply return to your AWS Management console, under EC2 you will see the details of the new instance you launched.
 
 Here, take a note of the public IP of the machine, we will soon be needing that.  You will find it listed under the IPv4 Public IP:  This address is likely to change if you ever terminate this instance and start a new one, or even pause the instance and reboot it later.
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_8.png)
  
 Now it is time to connect to your new EC2 instance.
 
@@ -110,6 +120,8 @@ This is what we expect, as the secure connection has never been established befo
 
 **Quick tip on PC**:  The steps above are great for connecting to your server once.  Since you will likely be connecting often, I suggest setting this up as a shortcut.
 
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_9.png)
+
 1. Right-click anywhere in File Explorer or the Desktop and select **New** > **Shortcut**.
 2. For the location of the item, type in `C:\Windows\System32\cmd.exe /k <the SSH command above>`
 	So for example, the ‘location’ box would contain the following: 
@@ -118,7 +130,7 @@ This is what we expect, as the secure connection has never been established befo
 4.	Give the shortcut a name.
 5.	Click Finish
 
-You will now have a handy-dandy shortcut on your desktop:
+You will now have a handy-dandy shortcut on your desktop: ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_10.png)
 
 ### Working in Ubuntu
 
@@ -314,6 +326,8 @@ In this folder we are going to create several files that the tap will use to set
 ```
 
 Logging into the application, I locate the API key in the Settings section.
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_6.jpg)
  
 Now to create the file, back on the EC2 instance we use ‘nano’ (the text editor) to create the file:
 
@@ -429,6 +443,7 @@ Now when I run the Tap and Target, I will get an output of all the Autopilot con
 
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
 
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_7.jpg)
 
 Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running.
 
@@ -437,6 +452,8 @@ Congratulations.  If you made it this far, you have succeeded in getting a Singe
 If you would like to build your own Tap I recommend this article by Jeff Huth at Bytecode: https://www.stitchdata.com/blog/how-to-build-a-singer-tap-infographic/
 if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer Discover Utility’ found here: https://github.com/chrisgoddard/singer-discover . It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
 If you want to explore JSON file structures , http://www.bodurov.com/JsonFormatter/ is a useful tool.
+
+---------------------------------------------------
 
  
 # Running Singer on Mac OS
@@ -535,6 +552,8 @@ In this folder we are going to create the JSON files that the Tap will use to se
 }
 ```
 Logging into the application, I locate the API key in the Settings section.
+
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_6.jpg)
  
 Now to create the file, back in the Mac Terminal window we use ‘nano’ (the text editor) to create the file:
 
@@ -648,6 +667,4 @@ Now when I run the Tap and Target, I will get an output of all the Autopilot con
 
 `$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
 
- 
-
-Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.
+ Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.
