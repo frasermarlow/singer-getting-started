@@ -94,6 +94,8 @@ Here, take a note of the public IP of the machine, we will soon be needing that.
 
 ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_8.png)
  
+#### Connect to AWS EC2 using SSH
+
 Now it is time to connect to your new EC2 instance. For this we will use SSH (Secure SHell is a secure networking protocol for connecting to a remote computer.)
 
 In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter).  A primer for [using SSH on Mac can be found here](https://osxtips.net/how-to-use-ssh-on-mac/).
@@ -137,22 +139,28 @@ This is what we expect, as the secure connection has never been established befo
 5.	Click Finish
 You will now have a handy-dandy shortcut on your desktop: ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_10.png)
 
+**Shortcut on Mac** Details for doing the same on Mac can be found here: [Create quick-access ssh shortcuts](http://hints.macworld.com/article.php?story=20060810042411590)
+
 ### Working in Ubuntu
 
 Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  In the default set up (such as the one we walked through above) you will be logged on as the generic user called ‘*ubuntu*’.  This is why you will see prompt look something like this:
 
 `ubuntu@ip-123-31-11-123:~$`
 
-The tilde (~) indicates that you are in this user’s home directory.
-Ubuntu is a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required
-In the following sections, the following apply:
+which is basically <user>@<computer>:<current-directory>
+
+The tilde (`~`) indicates that you are in this user’s home directory.
+
+Ubuntu is just a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required.
+
+In the sections below, the following apply:
 Any line that looks like this:
 
 `$ cd ~`
 
-Is a command you can execute in Ubuntu’s command line.  Simply copy and paste the instruction in, without the ‘$’ – so in the example above just type or copy/paste ‘ cd~ ’
+is a command you can execute in Ubuntu’s command line.  Simply copy and paste the instruction in to the command line, without the ‘$’ – so in the example above just type or copy/paste ‘ cd~ ’
 
-In the Windows command prompt interface we are using, ‘paste’ does not work.  Once you copy a command from this tutorial, you can typically use the right hand-mouse button to paste into the command window.
+In the Windows command prompt interface we are using, ‘paste’ does not work.  Once you copy a command from this tutorial, you can typically use the right-hand mouse button to paste into the command window.
 
 Also in BASH, anything after the hash character (`#`) is a comment.  I will occasionally add those after a command to add context.
 
