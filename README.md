@@ -55,7 +55,7 @@ If you are planning on setting up a data flow for your company, or something tha
 
 ### Setting up an EC2 instance:
 
-* Head over to the AWS management console ( https://aws.amazon.com/console/ ) and create a free AWS account or log in if you have one already.  You will need a credit card for this, but Amazon will confirm “We use your payment information to verify your identity and only for usage in excess of the AWS Free Tier Limits. We will not charge you for usage below the AWS Free Tier Limits.” – this demo should not incur any charges on your credit card.
+* Head over to the AWS management console ( https://aws.amazon.com/console/ ) and create a free AWS account or log in if you have one already.  You will need a credit card for this, but Amazon will confirm “_We use your payment information to verify your identity and only for usage in excess of the AWS Free Tier Limits. We will not charge you for usage below the AWS Free Tier Limits._” – this demo should not incur any charges on your credit card.
 * Enter a cellphone number for identification purposes.
 * Select the ‘free tier’ account
 * You will be limited to very small virtual machines.  Not to worry, Singer will run just fine, if not a bit slowly, on these ‘_micro_’ instances.
