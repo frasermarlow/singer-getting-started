@@ -111,10 +111,8 @@ Here is an example of what the command would look like with those variables plug
 
 The first time you connect you will be presented with a warning message along these lines:
 
-> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
-
-> ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y. 
-
+> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.  
+> ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.  
 > Are you sure you want to continue connecting (yes/no)? 
 
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
@@ -355,16 +353,11 @@ Let me break that command down a bit for you:
 
 All being well this command will result in the following message:
 
-> INFO Loading Schemas
-
-> INFO Loading schema for contacts
-
-> INFO Loading schema for lists
-
-> INFO Loading schema for smart_segments
-
-> INFO Loading schema for smart_segments_contacts
-
+> INFO Loading Schemas  
+> INFO Loading schema for contacts  
+> INFO Loading schema for lists  
+> INFO Loading schema for smart_segments  
+> INFO Loading schema for smart_segments_contacts  
 
 _As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘**Singer Discover Utility**’ found here: [https://github.com/chrisgoddard/singer-discover](https://github.com/chrisgoddard/singer-discover). It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include._
 
@@ -374,11 +367,11 @@ So that all looks good. We can check that we now have a ‘_catalog.json_’ fil
 
 And this will return the following:
 
-> total 40	
-> drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .	
-> drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..	
-> -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json	
-> -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json	
+> total 40  
+> drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .  
+> drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..  
+> -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json  
+> -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json  
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
 
@@ -454,9 +447,9 @@ Congratulations.  If you made it this far, you have succeeded in getting a Singe
 
 ### Additional resources:
 
-If you would like to build your own Tap I recommend this article by Jeff Huth at Bytecode: https://www.stitchdata.com/blog/how-to-build-a-singer-tap-infographic/
-if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer Discover Utility’ found here: https://github.com/chrisgoddard/singer-discover . It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
-If you want to explore JSON file structures , http://www.bodurov.com/JsonFormatter/ is a useful tool.
+* If you would like to build your own Tap I recommend [this article by Jeff Huth at Bytecode](https://www.stitchdata.com/blog/how-to-build-a-singer-tap-infographic/)
+* If you work with Taps on a regular basis, check out Chris Goddard’s ‘[Singer Discover Utility](https://github.com/chrisgoddard/singer-discover)’. It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
+* If you want to explore JSON file structures, [Vladimir Bodurov's JsonFormatter](http://www.bodurov.com/JsonFormatter/) is a quick and useful tool.
 
 ---------------------------------------------------
 
@@ -509,7 +502,7 @@ Now we have things set up, and we can go ahead and download a Tap and a Target f
 4.	Install the Tap or Target
 5.	Deactivate the virtual environment
 
-So here are the commands for those five steps for installing the tap I will be using, namely ‘tap-autopilot’.  Note that the command line prompt changes to (tap-autopilot)$ when we activate the virtual environment.
+So here are the commands for those five steps for installing the tap I will be using, namely ‘tap-autopilot’.  Note that the command line prompt changes to _(tap-autopilot)$_ when we activate the virtual environment.
 
 `$ virtualenv -p python3 tap-autopilot`
 `$ source tap-autopilot/bin/activate`
@@ -565,12 +558,14 @@ Now to create the file, back in the Mac Terminal window we use ‘nano’ (the t
 `$ nano config.json`
 
 and paste in the Key:
+
 ```
 {
     "api_key": "tH1s1Salot0Fch@ract#rsTh@tL00kL1ke@Pa$$word",
     "start_date": "2020-05-01T00:00:00Z"
 }
 ```
+
 The next step is to run the Tap in ‘*discovery mode*’.  
 
 What this means is that we are going to ask the Tap to connect to its source and figure out what data can be retrieved (some Taps hard-wire this structure, so don’t always stay up to date when the source data changes). 
@@ -588,13 +583,13 @@ Let me break that command down a bit for you:
 
 All being well this command will result in the following message:
 
->INFO Loading Schemas
->INFO Loading schema for contacts
->INFO Loading schema for lists
->INFO Loading schema for smart_segments
->INFO Loading schema for smart_segments_contacts
+>INFO Loading Schemas  
+>INFO Loading schema for contacts  
+>INFO Loading schema for lists  
+>INFO Loading schema for smart_segments  
+>INFO Loading schema for smart_segments_contacts  
 
-As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer Discover Utility’ found here: https://github.com/chrisgoddard/singer-discover . It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
+As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘[Singer Discover Utility](https://github.com/chrisgoddard/singer-discover)’ . It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
 
 So that all looks good. We can check that we now have a ‘catalog.json’ file in our folder by running:
 `$ ls -la`
@@ -612,11 +607,11 @@ So we now have a small config.json file and a larger catalog.json file. You can 
 
 If you want to explore how these catalog files are structured , I would recommend the Singer.io docs as well as the JSON explorer found at http://www.bodurov.com/JsonFormatter/ 
 
-There is one challenge with Singer catalog files – they often default to loading nothing and let you explicitly check off the tables or data types you want.
+There is one challenge with Singer catalog files – they often default to loading nothing and let you *explicitly* check off the tables or data types you want.
 
-Referring to the Singer documentation pertaining to the catalog,  we need to edit the catalog.json file and pick out which ‘streams’ we want to activate.  
+Referring to the Singer documentation pertaining to the catalog,  we need to edit the catalog.json file and pick out which ‘_streams_’ we want to activate.  
 
-We do this by adding the property `“selected”: true ` to the stream’s ‘metadata’ object:
+We do this by adding the property `“selected”: true ` to the stream’s ‘_metadata_’ object:
 
 In my case I browse through the *catalog.json* file until I find the steam’s ‘*metadata*’ array and I append the `"selected": true`   key/value pair to the metadata object for each stream I want to import:
 
@@ -648,6 +643,7 @@ So to manage the start date of each of these streams, we can specify the earlies
 `$ nano ~/tap-autopilot-config/state.json`
 
 And specify a start date for each stream as follows:
+
 ```
 {
 	"contacts": "2020-06-18T20:32:05Z",
@@ -656,6 +652,7 @@ And specify a start date for each stream as follows:
 	"smart_segments_contacts": "2020-06-18T20:32:05Z"
 }
 ```
+
 Exit the text editor (Cntl+X) and confirm the changes should be saved.
 Now, let’s go back to our home directory:
 
