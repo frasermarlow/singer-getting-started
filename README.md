@@ -33,6 +33,8 @@ So how much expertise is required to work your way through this tutorial?  Let m
 
 ## Part 1: Setting up your AWS EC2 instance.
 
+### Why use EC2?
+
 As mentioned above, you can run Singer on a local PC or Mac.  As long as you can run Python 3 on your machine you should be able to skip this set up and move on to the next section if you like. But personally I like to work with AWS EC2 instances.  EC2 stands for ‘Amazon Elastic Compute Cloud’ and is a service where you can boot up a virtual computer on the cloud, log into it using SSH and run applications using the Shell command line interface.
 
 EC2 instances are stand-alone, free for 12 month (for the really small instances) and if things fall apart you can just terminate an instance and boot up a fresh one in a couple of minutes.  In fact, in writing this tutorial I terminated my EC2 instance several times and just rebooted a new one.  (Note that while this only take a couple of minutes, the new server’s IP address may well change, and you will need to update your connection details.)
@@ -95,10 +97,12 @@ Here is an example of what the command would look like with those variables plug
 The first time you connect you will be presented with a warning message along these lines:
 
 > The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
+
 > ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
+
 > Are you sure you want to continue connecting (yes/no)?
 
-This is what we expect, as the secure connection has never been established before.  Simply type in ‘yes’ and proceed.
+This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
 
 Quick tip on PC:  The steps above are great for connecting to your server once.  Since you will likely be connecting often, I suggest setting this up as a shortcut.
 
@@ -129,7 +133,7 @@ Is a command you can execute in Ubuntu’s command line.  Simply copy and paste 
 
 In the Windows command prompt interface we are using, ‘paste’ does not work.  Once you copy a command from this tutorial, you can typically use the right hand-mouse button to paste into the command window.
 
-Also in BASH, anything after the hash character (‘#’) is a comment.  I will occasionally add those after a command to add context.
+Also in BASH, anything after the hash character (`#`) is a comment.  I will occasionally add those after a command to add context.
 
 ### Part 2: Setting up the environment.
 
@@ -139,11 +143,19 @@ First, there is an assumption that you already have a fully featured development
 
 The second thing to tackle is this: the documentation ‘recommends’ using what are called ‘virtual environments’ for running each tap or target.  A virtual environment ( or ‘_venv_’ for short) is a way of running individual programs in their own little bubble, calling on their own little subset of programs.  So you might have a Tap that needs version 3.1 of a module, but the Target is asking for version 4.3.  The virtual environment allows for them each to maintain their own set of preferences.
 
-In truth, using virtual environments is a requirement, not a nice to have.  Things just will not work if you try to run everything in the same environment.  This makes things a bit more convoluted, but not at all unmanageable.  You will get used to it quickly.
+In truth, using virtual environments is a requirement, not a nice to have.  Things just will not work if you try to run everything in the same environment.  To run Singer we need to use **virtual environments**.  Let me explain what those are quickly.
 
-First, let’s get things up to date:
+When a program runs in Python (or any other operating system) it calls on a bunch of other programs.  Each one of these individual programs is individually managed and upgraded.  So at one point in time, using a specific combination of these modules, a developer got the core program to work.
 
-When you install a new EC2 instance you are not necessarily getting the most recent version of things, so first let’s run an update.
+But if any one of these modules is on a different version on your machine you will run into the dreaded dependency errors.
+To protect from that we create a virtual environment.  All programs operating in that virtual environment will call on a specific set of versions for any required module.
+
+So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment.  This makes things a bit more convoluted, but not at all unmanageable.  You will get used to it quickly. It’s not as complicated as it sounds… bear with me.
+
+
+So first, let’s get things up to date:
+
+When you install a new EC2 instance you are not necessarily getting the most recent version of things, so let’s run an update.
 
 `$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
@@ -184,22 +196,15 @@ But in addition to Python we are going to need the development libraries, so let
 
 **OK, NOW can we install python?**
 
-Sure.  Well no.  Not yet.  To run Singer we need to use virtual environments.  Let me explain what those are quickly.
+Sure.  Well no.  Not yet. We need to now deal with that second issue - the **virtual environments**.
 
-When a program runs in Python (or any other operating system) it calls on a bunch of other programs.  Each one of these individual programs is individually managed and upgraded.  So at one point in time, using a specific combination of these modules, a developer got the core program to work.
-
-But if any one of these modules is on a different version on your machine you will run into the dreaded dependency errors.
-To protect from that we create a virtual environment.  All programs operating in that virtual environment will call on a specific set of versions for any required module.
-
-So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment.  It’s not as complicated as it sounds… bear with me.
-
-First let’s install the module that allows us to manage versions of Python and these virtual environments.  Virtual environments are managed with ‘venv’ whereas Python versions are managed with ‘pyenv’. pyenv is a collection of shell scripts and not installable with pip so we use this instead:
+Let’s install the module that allows us to manage versions of Python and these virtual environments.  Virtual environments are managed with ‘venv’ whereas Python _versions_ are managed with ‘pyenv’. Pyenv is a collection of shell scripts and not installable with **pip** so we use this instead:
 
 `$ sudo apt-get install -y python3-venv`
 
 `$ curl https://pyenv.run | bash`
 
-As the second installation completes, you will see a message that says “ Load pyenv automatically by adding the following to ~/.bashrc:”  … followed by a command.   ‘bashrc’ is a set of commands that Bash will run on startup.  So we need to edit this file (~/.bashrc) to add a few lines.  An easy way to do that is to run the following commands, in this order, one at a time:
+As the second installation completes, you will see a message that says “_Load pyenv automatically by adding the following to \~/.bashrc:_”  … followed by a command.   ‘_bashrc_’ is a set of commands that Bash will run on startup.  It's a hidden file on the Ubuntu system so the file name has a period in front of it.  So we need to edit this file (\~/.bashrc) to add a few lines.  Here we are not going to open the file to edit it.  Instead, an easy way to do that is to run the following commands, in this order, one at a time:
 
 ```
 $ echo '' >> ~/.bashrc
@@ -208,6 +213,9 @@ $ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 $ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 $ exec "$SHELL"
 ```
+
+Each one of these lines will append a new line to the file `.bashrc` by using the `>>` (_append output_) command.
+
 
 I promise we are getting close to installing Python in a virtual environment!
 
