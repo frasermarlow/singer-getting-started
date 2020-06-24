@@ -78,7 +78,7 @@ In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter
 
 Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`
 
-	`ssh -i <path-to-pem> -v ubuntu@<server-ip>`
+`ssh -i <path-to-pem> -v ubuntu@<server-ip>`
 
 So what is going on here?  In essence, you are instructing windows to use `ssh` to connect as user ‘ubuntu’ to the computer found at `<server-ip>`  using the Key file `<path-to-pem>`
 
@@ -88,11 +88,11 @@ So where do we get these two variables?  Well `<path-to-pem>` is the file locati
 
 In case you were wondering, the ‘-I’ and the ‘-v’ simply tell SSH that the next item in the command will be the .pem file and the server location respectively.  So you could equally run the command as 
 
-	`ssh -v ubuntu@<server-ip> -i <path-to-pem>`
+`ssh -v ubuntu@<server-ip> -i <path-to-pem>`
 
 Here is an example of what the command would look like with those variables plugged in:
 
-	`ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
+`ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
 
 The first time you connect you will be presented with a warning message along these lines:
 
@@ -118,14 +118,14 @@ You will now have a handy-dandy shortcut on your desktop:
 
 Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  In the default set up (such as the one we walked through above) you will be logged on as the generic user called ‘*ubuntu*’.  This is why you will see prompt look something like this:
 
-	`ubuntu@ip-123-31-11-123:~$`
+`ubuntu@ip-123-31-11-123:~$`
 
 The tilde (~) indicates that you are in this user’s home directory.
 Ubuntu is a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required
 In the following sections, the following apply:
 Any line that looks like this:
 
-	`$ cd ~`
+`$ cd ~`
 
 Is a command you can execute in Ubuntu’s command line.  Simply copy and paste the instruction in, without the ‘$’ – so in the example above just type or copy/paste ‘ cd~ ’
 
@@ -154,22 +154,22 @@ So first, let’s get things up to date:
 
 When you install a new EC2 instance you are not necessarily getting the most recent version of things, so let’s run an update.
 
-	`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
+`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
 This will run three sequential commands to find all out of date packages, download the required updates and then install them.  You may need to agree to some installs as they will use up some of your ‘hard drive’ on the cloud.  This step may take a little while.
 Sometimes, we use Git to install the Taps and Targets we want to use, and Git may not yet be installed in your environment, so let’s do that now:
 
-	`$ sudo apt install git`
+`$ sudo apt install git`
 
 Once your tap and target are running you will want to run it on a schedule.  For this we use Cron.  So let’s install that while we are at it:
 
-	`$ sudo apt-get install cron`
+`$ sudo apt-get install cron`
 
 Again, you might find it is already on your system, in which case you are all set.
 
 Finally, let’s run 
 
-	`$ sudo apt install -y pylint`
+`$ sudo apt install -y pylint`
 
 This installs a code analysis tool we will use to make sure taps and targets are working OK.
 
@@ -177,7 +177,7 @@ Now, let us set up Python
 
 Most computers will come with Python pre-installed.  It is a very popular programming language.  The Ubuntu instance we set up above for example comes preinstalled with version 3.8.2.  We know this because running the command 
 
-	`$ python3 --version`
+`$ python3 --version`
 
 Returns the following:
 
@@ -187,9 +187,9 @@ Singer runs on Python 3.5.2, but I have found that installing that specific vers
 
 But in addition to Python we are going to need the development libraries, so let us install those first:
 
-	`$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
+`$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
 
-	`$ sudo apt-get install -y python3-dev libssl-dev`
+`$ sudo apt-get install -y python3-dev libssl-dev`
 
 **OK, NOW can we install python?**
 
@@ -357,7 +357,7 @@ And this will return the following:
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
 
-	`$ nano catalog.json`
+`$ nano catalog.json`
 
 If you want to explore how these catalog files are structured , I would recommend the Singer.io docs as well as the JSON explorer found at [http://www.bodurov.com/JsonFormatter/](http://www.bodurov.com/JsonFormatter/)
 
@@ -433,7 +433,7 @@ if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer 
 If you want to explore JSON file structures , http://www.bodurov.com/JsonFormatter/ is a useful tool.
 
  
-## Running Singer on Mac OS
+# Running Singer on Mac OS
 
 Running Taps and Targets locally on a Mac is probably the most common scenario for testing and development, but getting Singer to work does require some set up.
 
@@ -448,104 +448,148 @@ First, we install Homebrew, the free software package management system which ma
 `$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 
 (Note: Likely your Mac will already have Xcode installed, but if you run into issues installing Homebrew, that will likely be the cause. Xcode can be installed from the Apple Mac store.)
+
 While we are at it, we will install the software testing application PyLint
-$ brew install pylint
+
+`$ brew install pylint`
+
 With these in place, we can now focus on getting Python itself installed.  First let’s check on the current version:
-$ python --version
+
+`$ python --version`
+
 This would typically return Python 2.7.16 that ships with MacOS (as of June 2020).  So we need to install the more up-to-date Python3.  Before we worry about the specific version we need for Singer, let’s install the default Python3 on your machine – don’t worry, we will be able to run programs under different Python versions later.
-$ brew install python  # installs 3.7.7 as of time of writing
+
+`$ brew install python  # installs 3.7.7 as of time of writing`
+
 So now we have Python3 running, we will install an application that allows us to manage multiple versions of Python on the same computer, called PyEnv:
-$ brew install pyenv
+
+`$ brew install pyenv`
+
 And using PyEnv we can now install the required version of Python3 we need, namely 3.5.3:
-$ pyenv install 3.5.3
+
+`$ pyenv install 3.5.3`
+
 Great.  Next we are going to install an application that allows us to create ‘virtual environments’.  You can think of these as containers to run a program in, each container setting up its own set of modules to support the core program.  This is important because different taps or targets may have different dependencies to run smoothly, and these may conflict from one tap to the next.
-$ pip3 install virtualenv
+
+`$ pip3 install virtualenv`
+
 Now we have things set up, and we can go ahead and download a Tap and a Target for us to run.  Each time you install an integration, you will follow these same five steps:
 1.	Create a new virtual environment
 2.	Activate the virtual environment
 3.	Set the local Python version
 4.	Install the Tap or Target
 5.	Deactivate the virtual environment
+
 So here are the commands for those five steps for installing the tap I will be using, namely ‘tap-autopilot’.  Note that the command line prompt changes to (tap-autopilot)$ when we activate the virtual environment.
-$ virtualenv -p python3 tap-autopilot
-$ source tap-autopilot/bin/activate
-(tap-autopilot)$ pyenv local 3.5.3
-(tap-autopilot)$ pyenv versions # to confirm install and version assigned
-(tap-autopilot)$ pip install tap-autopilot
-(tap-autopilot)$ deactivate
+
+`$ virtualenv -p python3 tap-autopilot`
+`$ source tap-autopilot/bin/activate`
+`(tap-autopilot)$ pyenv local 3.5.3`
+`(tap-autopilot)$ pyenv versions # to confirm install and version assigned`
+`(tap-autopilot)$ pip install tap-autopilot`
+`(tap-autopilot)$ deactivate`
+
 We repeat these same five steps for each tap or Target we install.  So let’s repeat this process for installing the Target which allows us to pipe data to .csv files on our local machine, called ‘target-csv’
-$ virtualenv -p python3 target-csv
-$ source target-csv /bin/activate
-(target-csv)$ pyenv local 3.5.3
-(target-csv)$ pyenv versions # to confirm install and version assigned
-(target-csv)$ pip install tap-autopilot
-(target-csv)$ deactivate
+
+`$ virtualenv -p python3 target-csv`
+`$ source target-csv /bin/activate`
+`(target-csv)$ pyenv local 3.5.3`
+`(target-csv)$ pyenv versions # to confirm install and version assigned`
+`(target-csv)$ pip install tap-autopilot`
+`(target-csv)$ deactivate`
+
 With these installed, we now need to configure the Tap.  Each Tap can be a bit different, and I recommend visiting the Github repo for the tap you are working with for the exact details. In my case that would be https://github.com/singer-io/tap-autopilot - but you can find the link for your specific Tap on the Singer.io website, or by googling “singer-io tap-name” – for example “singer-io tap-adwords”.
 
 In the context of this tutorial, note that ‘target-csv’ does not need any configuration, but most other Targets will, as they will require connection details to your data destination, such as a database or remote folder.
-In most cases, configuring a Tap requires 3 files in JSON format:  config.json, catalog.json, and state.json.
-config.json : This file holds the environment variables such as the API key, integration start date and any other bespoke variables the tap requires.  This is always a required file.
-catalog.json : This file holds the structure of the data streams that are available for inclusion when we run an import.  Most taps allow us to create this file automatically using ‘discovery’ mode.  Once the file is created we can then turn streams on or off to specify the data we want.
-state.json : This file captures the current state of the data feed – so it tracks where we wrap up one import so that we can pick up where we left off on the next run.  With some Taps, we can also use the state.json file to specify independent start dates for importing different data types.
+
+In most cases, configuring a Tap requires 3 files in JSON format:  **config.json**, **catalog.json**, and **state.json**.
+
+**config.json** : This file holds the environment variables such as the API key, integration start date and any other bespoke variables the tap requires.  This is always a required file.
+
+**catalog.json** : This file holds the structure of the data streams that are available for inclusion when we run an import.  Most taps allow us to create this file automatically using ‘discovery’ mode.  Once the file is created we can then turn streams on or off to specify the data we want.
+
+**state.json** : This file captures the current state of the data feed – so it tracks where we wrap up one import so that we can pick up where we left off on the next run.  With some Taps, we can also use the state.json file to specify independent start dates for importing different data types.
 
 To keep things organized, let’s create a folder where we can keep our configuration files organized.  First let us just make sure you are in the root directory, so just run this:
-	$ cd ~     # return to the home directory
+
+`$ cd ~     # return to the home directory`
+
 This just means ‘change the current active directory to my home folder’.
 Now let’s create a folder for our config files.  You can pick whichever folder name you like but naming it tap-<tap name>-config is a good convention.
-	$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’
-	$ cd tap-autopilot-config     #  enter that directory
-In this folder we are going to create the JSON files that the Tap will use to set the parameters for the data import.  The first one (which is required) is the environment variables for the Tap, namely what access token to use to access my Autopilot instance.  As per the tap instructions, we will need to create a small file in JSON format called ‘config.json’ with the following details:
+
+`$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’`
+`$ cd tap-autopilot-config     #  enter that directory`
+
+In this folder we are going to create the JSON files that the Tap will use to set the parameters for the data import.  The first one (which is required) is the environment variables for the Tap, namely what access token to use to access my Autopilot instance.  As per the tap instructions, we will need to create a small file in JSON format called ‘*config.json*’ with the following details:
+```
 {
     "api_key": "your-autopilot-api-token",
     "start_date": "2020-01-01T00:00:00Z"
 }
-
+```
 Logging into the application, I locate the API key in the Settings section.
  
 Now to create the file, back in the Mac Terminal window we use ‘nano’ (the text editor) to create the file:
-	$ nano config.json
+
+`$ nano config.json`
+
 and paste in the Key:
+```
 {
     "api_key": "tH1s1Salot0Fch@ract#rsTh@tL00kL1ke@Pa$$word",
     "start_date": "2020-05-01T00:00:00Z"
 }
+```
+The next step is to run the Tap in ‘*discovery mode*’.  
 
-The next step is to run the Tap in ‘discovery mode’.  What this means is that we are going to ask the Tap to connect to its source and figure out what data can be retrieved (some Taps hard wire this structure, so don’t always stay up to date when the source data changes).  
-Discovery mode will allow us to generate a ‘catalog’ file with all the data that we can pull from – in this case – the Autopilot system.  Once this catalog.json file is generated, we can tweak it to our purpose.  Using ‘discovery’ is much easier than trying to write our catalog from scratch.  So here is the command for doing this:
-$ $ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --discover  > ~/tap-autopilot-config/catalog.json
+What this means is that we are going to ask the Tap to connect to its source and figure out what data can be retrieved (some Taps hard-wire this structure, so don’t always stay up to date when the source data changes). 
+
+*Discovery mode* will allow us to generate a ‘*catalog*’ file with all the data that we can pull from – in this case – the Autopilot system.  Once this *catalog.json* file is generated, we can tweak it to our purpose.  Using ‘*discovery*’ is much easier than trying to write our catalog from scratch.  So here is the command for doing this:
+
+`$  ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --discover  > ~/tap-autopilot-config/catalog.json`
+
 Let me break that command down a bit for you:
-~/tap-autopilot/bin/tap-autopilot	This runs the Tap from inside its virtual environment…
- --config ~/tap-autopilot-config/config.json 	… using the configuration file found at this location…
-–discover  					… and runs the Tap in ;discover’ mode
-> ~/tap-autopilot-config/catalog.json		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
+
+`~/tap-autopilot/bin/tap-autopilot`	This runs the Tap from inside its virtual environment…
+ `--config ~/tap-autopilot-config/config.json` 	… using the configuration file found at this location…
+`–discover`  					… and runs the Tap in ;discover’ mode
+`\> ~/tap-autopilot-config/catalog.json`		… and write the output of that command to a new file in the ‘*tap-autopilot-config*’ folder called ‘*catalog.json*’
+
 All being well this command will result in the following message:
-INFO Loading Schemas
-INFO Loading schema for contacts
-INFO Loading schema for lists
-INFO Loading schema for smart_segments
-INFO Loading schema for smart_segments_contacts
+
+>INFO Loading Schemas
+>INFO Loading schema for contacts
+>INFO Loading schema for lists
+>INFO Loading schema for smart_segments
+>INFO Loading schema for smart_segments_contacts
 
 As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘Singer Discover Utility’ found here: https://github.com/chrisgoddard/singer-discover . It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
 
-
 So that all looks good. We can check that we now have a ‘catalog.json’ file in our folder by running:
-$ ls -la
+`$ ls -la`
 And this will return the following:
-total 40
+
+>total 40
 drwxrwxr-x 2 ___________ ___________  4096 Jun 17 17:32 .
 drwxr-xr-x 8 ___________ ___________  4096 Jun 17 16:05 ..
 -rw-rw-r-- 1 ___________ ___________ 27189 Jun 17 17:32 catalog.json
 -rw-rw-r-- 1 ___________ ___________    96 Jun 17 16:08 config.json
 
-So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
-$ nano catalog.json
-If you want to explore how these catalog files are structured , I would recommend the Singer.io docs as well as the JSON explorer found at http://www.bodurov.com/JsonFormatter/ 
-There is one challenge with Singer catalog files – they often default to loading nothing and let you explicitly check off the tables or data types you want.
-Referring to the Singer documentation pertaining to the catalog,  we need to edit the catalog.json file and pick out which ‘streams’ we want to activate.  We do this by adding the property 
-“selected”: true 
-to the stream’s ‘metadata’ object:
-In my case I browse through the catalog.json file until I find the steam’s ‘metadata’ array and I append the "selected": true   key/value pair to the metadata object for each stream I want to import:
+So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with
+ 
+`$ nano catalog.json`
 
+If you want to explore how these catalog files are structured , I would recommend the Singer.io docs as well as the JSON explorer found at http://www.bodurov.com/JsonFormatter/ 
+
+There is one challenge with Singer catalog files – they often default to loading nothing and let you explicitly check off the tables or data types you want.
+
+Referring to the Singer documentation pertaining to the catalog,  we need to edit the catalog.json file and pick out which ‘streams’ we want to activate.  
+
+We do this by adding the property `“selected”: true ` to the stream’s ‘metadata’ object:
+
+In my case I browse through the *catalog.json* file until I find the steam’s ‘*metadata*’ array and I append the `"selected": true`   key/value pair to the metadata object for each stream I want to import:
+
+```
 "metadata": [
                 {
                     "breadcrumb": [],
@@ -557,33 +601,46 @@ In my case I browse through the catalog.json file until I find the steam’s ‘
                         ]
                     }
                 }, 
+```
 
 This done, exit the text editor with Cntl+X (answer ‘Y’ to save your changes). 
-We have one final configuration JSON file to create, and that is the ‘state’ file.  In essence the role of the ‘state’ file is to capture at the end of each data run the state of play, so that next time the tap-to-target dataflow runs, it can pick up where it left off.
-The thing is each tap will handle the ‘state’ a little bit differently, depending on how the team or individual developing the tap decided to implement things.
-In the case of tap-autopilot I am going to use the state.json file to tell the tap which date I want it to start importing data from. Like the ‘select’ statement in catalog.json, is done for each ‘stream’ individually.
-Examining the catalog.json file, if you search for the key ‘tap_stream_id’ you will see that tap-autopilot pulls in four types of data: "contacts","lists","smart_segments", and "smart_segments_contacts".
-So to manage the start date of each of these streams, we can specify the earliest date to match as follows.  Create the file with 
-$ nano ~/tap-autopilot-config/state.json
-And specify a start date for each stream as follows:
 
+We have one final configuration JSON file to create, and that is the ‘*state*’ file.  In essence the role of the ‘*state*’ file is to capture at the end of each data run the state of play, so that next time the tap-to-target dataflow runs, it can pick up where it left off.
+
+The thing is each tap will handle the ‘state’ a little bit differently, depending on how the team or individual developing the tap decided to implement things.
+
+In the case of **tap-autopilot** I am going to use the *state.json* file to tell the tap which date I want it to start importing data from. Like the ‘*select*' statement in *catalog.json*, is done for each ‘*stream*’ individually.
+Examining the *catalog.json* file, if you search for the key ‘*tap_stream_id*’ you will see that tap-autopilot pulls in four types of data: "*contacts*","*lists*","*smart_segments*", and "*smart_segments_contacts*".
+
+So to manage the start date of each of these streams, we can specify the earliest date to match as follows.  Create the file with 
+
+`$ nano ~/tap-autopilot-config/state.json`
+
+And specify a start date for each stream as follows:
+```
 {
 	"contacts": "2020-06-18T20:32:05Z",
 	"lists": "2020-06-18T20:32:05Z",
 	"smart_segments": "2020-06-18T20:32:05Z",
 	"smart_segments_contacts": "2020-06-18T20:32:05Z"
 }
+```
 Exit the text editor (Cntl+X) and confirm the changes should be saved.
 Now, let’s go back to our home directory:
-$ cd ~
+
+`$ cd ~`
+
 When we run the Tap and Target, it will drop all the output files in whatever local folder I am in.  This is true because I am using target-csv but of course you might be setting up a Target that pushed data back up to a database or a remote destination.  In that case you will need to follow the configuration steps for that Destination. 
+
 But for now I am going to create a new folder to hold my exported Autopilot data:
-	$ mkdir autopilot-export
-	$ cd autopilot-export
+
+`$ mkdir autopilot-export`
+`$ cd autopilot-export`
+
 Now when I run the Tap and Target, I will get an output of all the Autopilot contacts since 2020-06-18 in .csv format.
-$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv
+
+`$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
 
  
 
-Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running.
-
+Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.
