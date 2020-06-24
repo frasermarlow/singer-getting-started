@@ -187,7 +187,10 @@ When you install a new EC2 instance you are not necessarily getting the most rec
 
 `$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
-This will run three sequential commands to find all out of date packages, download the required updates and then install them.  You may need to agree to some installs as they will use up some of your ‘hard drive’ on the cloud.  This step may take a little while.
+(Note that here I am executing three sequential commands, but using `&&` to put them on a single command line)
+
+This will find all out of date packages, download the required updates and then install them.  You may need to agree to some installs as they will use up some of your ‘hard drive’ on the cloud.  This sequence of steps may take a little while.
+
 Sometimes, we use Git to install the Taps and Targets we want to use, and Git may not yet be installed in your environment, so let’s do that now:
 
 `$ sudo apt install git`
