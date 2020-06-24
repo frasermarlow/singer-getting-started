@@ -78,7 +78,7 @@ In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter
 
 Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`
 
-`ssh -i <path-to-pem> -v ubuntu@<server-ip>`
+	`ssh -i <path-to-pem> -v ubuntu@<server-ip>`
 
 So what is going on here?  In essence, you are instructing windows to use `ssh` to connect as user ‘ubuntu’ to the computer found at `<server-ip>`  using the Key file `<path-to-pem>`
 
@@ -88,23 +88,21 @@ So where do we get these two variables?  Well `<path-to-pem>` is the file locati
 
 In case you were wondering, the ‘-I’ and the ‘-v’ simply tell SSH that the next item in the command will be the .pem file and the server location respectively.  So you could equally run the command as 
 
-`ssh -v ubuntu@<server-ip> -i <path-to-pem>`
+	`ssh -v ubuntu@<server-ip> -i <path-to-pem>`
 
 Here is an example of what the command would look like with those variables plugged in:
 
-`ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
+	`ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
 
 The first time you connect you will be presented with a warning message along these lines:
 
 > The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
-
 > ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
-
 > Are you sure you want to continue connecting (yes/no)?
 
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
 
-Quick tip on PC:  The steps above are great for connecting to your server once.  Since you will likely be connecting often, I suggest setting this up as a shortcut.
+**Quick tip on PC**:  The steps above are great for connecting to your server once.  Since you will likely be connecting often, I suggest setting this up as a shortcut.
 
 1. Right-click anywhere in File Explorer or the Desktop and select **New** > **Shortcut**.
 2. For the location of the item, type in `C:\Windows\System32\cmd.exe /k <the SSH command above>`
@@ -120,14 +118,14 @@ You will now have a handy-dandy shortcut on your desktop:
 
 Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  In the default set up (such as the one we walked through above) you will be logged on as the generic user called ‘*ubuntu*’.  This is why you will see prompt look something like this:
 
-`ubuntu@ip-123-31-11-123:~$`
+	`ubuntu@ip-123-31-11-123:~$`
 
 The tilde (~) indicates that you are in this user’s home directory.
 Ubuntu is a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required
 In the following sections, the following apply:
 Any line that looks like this:
 
-`$ cd ~`
+	`$ cd ~`
 
 Is a command you can execute in Ubuntu’s command line.  Simply copy and paste the instruction in, without the ‘$’ – so in the example above just type or copy/paste ‘ cd~ ’
 
@@ -152,27 +150,26 @@ To protect from that we create a virtual environment.  All programs operating in
 
 So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment.  This makes things a bit more convoluted, but not at all unmanageable.  You will get used to it quickly. It’s not as complicated as it sounds… bear with me.
 
-
 So first, let’s get things up to date:
 
 When you install a new EC2 instance you are not necessarily getting the most recent version of things, so let’s run an update.
 
-`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
+	`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
 This will run three sequential commands to find all out of date packages, download the required updates and then install them.  You may need to agree to some installs as they will use up some of your ‘hard drive’ on the cloud.  This step may take a little while.
 Sometimes, we use Git to install the Taps and Targets we want to use, and Git may not yet be installed in your environment, so let’s do that now:
 
-`$ sudo apt install git`
+	`$ sudo apt install git`
 
 Once your tap and target are running you will want to run it on a schedule.  For this we use Cron.  So let’s install that while we are at it:
 
-`$ sudo apt-get install cron`
+	`$ sudo apt-get install cron`
 
 Again, you might find it is already on your system, in which case you are all set.
 
 Finally, let’s run 
 
-`$ sudo apt install -y pylint`
+	`$ sudo apt install -y pylint`
 
 This installs a code analysis tool we will use to make sure taps and targets are working OK.
 
@@ -180,7 +177,7 @@ Now, let us set up Python
 
 Most computers will come with Python pre-installed.  It is a very popular programming language.  The Ubuntu instance we set up above for example comes preinstalled with version 3.8.2.  We know this because running the command 
 
-`$ python3 --version`
+	`$ python3 --version`
 
 Returns the following:
 
@@ -190,9 +187,9 @@ Singer runs on Python 3.5.2, but I have found that installing that specific vers
 
 But in addition to Python we are going to need the development libraries, so let us install those first:
 
-`$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
+	`$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
 
-`$ sudo apt-get install -y python3-dev libssl-dev`
+	`$ sudo apt-get install -y python3-dev libssl-dev`
 
 **OK, NOW can we install python?**
 
@@ -338,15 +335,10 @@ Let me break that command down a bit for you:
 ` > ~/tap-autopilot-config/catalog.json`		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
 
 All being well this command will result in the following message:
-
 > INFO Loading Schemas
-
 > INFO Loading schema for contacts
-
 > INFO Loading schema for lists
-
 > INFO Loading schema for smart_segments
-
 > INFO Loading schema for smart_segments_contacts
 
 As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘**Singer Discover Utility**’ found here: [https://github.com/chrisgoddard/singer-discover](https://github.com/chrisgoddard/singer-discover). It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
@@ -358,18 +350,14 @@ So that all looks good. We can check that we now have a ‘_catalog.json_’ fil
 And this will return the following:
 
 > total 40
-
 > drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .
-
 > drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..
-
 > -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json
-
 > -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
 
-`$ nano catalog.json`
+	`$ nano catalog.json`
 
 If you want to explore how these catalog files are structured , I would recommend the Singer.io docs as well as the JSON explorer found at [http://www.bodurov.com/JsonFormatter/](http://www.bodurov.com/JsonFormatter/)
 
