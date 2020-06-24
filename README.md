@@ -1,18 +1,17 @@
 # Singer: Getting Started Guide
 
 ## Table of Contents
-### [Part 1: Setting up your AWS EC2 instance. 2](#_Toc43831453)
-[Setting up an EC2 instance: 3](#_Toc43831454)
-[Now it is time to connect to your new EC2 instance. 5](#_Toc43831455)
-[Working in Ubuntu 6](#_Toc43831456)
-### [Part 2: Setting up the environment. 7](#_Toc43831457)
-[First, let&#39;s get things up to date: 7](#_Toc43831458)
-[Now, let us set up Python 8](#_Toc43831459)
-[OK, NOW can we install python? 8](#_Toc43831460)
-### [Part 3: Installing, and then running the tap and the target 9](#_Toc43831461)
-[Additional resources: 14](#_Toc43831462
-[Running Singer on Mac OS 16](#_Toc43831463)
-
+### [Part 1: Setting up your AWS EC2 instance.](#Part-1:-Setting-up-your-AWS-EC2-instance)
+[Setting up an EC2 instance](#_2)
+[Now it is time to connect to your new EC2 instance](#_3)
+[Working in Ubuntu](#_4)
+### [Part 2: Setting up the environment](#_5)
+[First, let&#39;s get things up to date](#_6)
+[Now, let us set up Python](#_7)
+[OK, NOW can we install python?](#_8)
+### [Part 3: Installing, and then running the tap and the target](#_9)
+[Additional resources](#_10)
+[Running Singer on Mac OS](#_11)
 
 ### Introduction
 Singer.io is a great framework for creating reliable data flows, to get data from point A to point B. But if you are not an experienced data engineer or software developer, it is easy to hit a few stumbling blocks early in the process. These teething issues are enough to make most data scientists or data analysts give up on Singer and go look for a more consumer-friendly solution ([which is what Stitch is all about](https://www.stitchdata.com/).)
@@ -31,12 +30,12 @@ I hope that by the end of this tutorial you will have a better understanding and
 
 So how much expertise is required to work your way through this tutorial? Let me try and set the bar for you:
 
-- You do not need to be a Python expert or even know much about programming at all.
-- You need to be comfortable using the command line to interface with a computer, we will be using that almost exclusively.
-- Familiarity with networking and connecting via SSH is a plus if you are going to try the AWS EC2 approach, but if not I recommend running on your local machine.
-- You will need a credit card for authorization purposes, but don&#39;t worry – you don&#39;t need to spend a dime to complete this tutorial.
+* You do not need to be a Python expert or even know much about programming at all.
+* You need to be comfortable using the command line to interface with a computer, we will be using that almost exclusively.
+* Familiarity with networking and connecting via SSH is a plus if you are going to try the AWS EC2 approach, but if not I recommend running on your local machine.
+* You will need a credit card for authorization purposes, but don&#39;t worry – you don&#39;t need to spend a dime to complete this tutorial.
 
-_[__I am going to develop on my local machine – skip the EC2 instance set-up_ _\&gt;]_
+[__I am going to develop on my local machine – skip the EC2 instance set-up_ _\&gt;](#_3)
 
 ## Part 1: Setting up your AWS EC2 instance.
 
@@ -95,7 +94,7 @@ In Windows open the command prompt (Start menu, type &#39;cmd&#39; and press ent
 
 Here you need to create the following command replacing the two values _\&lt;path-to-pem\&gt;_ and _\&lt;server-ip\&gt;_
 
-**ssh -i** _ **\&lt;path-to-pem\&gt;** _ **-v ubuntu@** _ **\&lt;server-ip\&gt;** _
+`ssh -i <path-to-pem> -v ubuntu@<server-ip>`
 
 So what is going on here? In essence, you are instructing windows to use `ssh` to connect as user &#39;ubuntu&#39; to the computer found at _\&lt;server-ip\&gt;_ using the Key file _\&lt;path-to-pem\&gt;_
 
@@ -105,19 +104,17 @@ _\&lt;server-ip\&gt;_ is the public IP of the EC2 machine you are connecting to.
 
 In case you were wondering, the &#39;-I&#39; and the &#39;-v&#39; simply tell SSH that the next item in the command will be the .pem file and the server location respectively. So you could equally run the command as
 
-**ssh -v ubuntu@** _ **\&lt;server-ip\&gt;** _ **-i** _ **\&lt;path-to-pem\&gt;** _
+`ssh -v ubuntu@<server-ip> -i <path-to-pem>`
 
 Here is an example of what the command would look like with those variables plugged in:
 
-**ssh -i C:\Users\** _ **myusername** _ **\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4**
+`ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
 
 The first time you connect you will be presented with a warning message along these lines:
 
-_The authenticity of host &#39;18.216.66.8 (18.216.66.8)&#39; can&#39;t be established._
-
-_ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y._
-
-_Are you sure you want to continue connecting (yes/no)?_
+> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.
+> ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.
+> Are you sure you want to continue connecting (yes/no)?
 
 This is what we expect, as the secure connection has never been established before. Simply type in &#39;yes&#39; and proceed.
 
@@ -142,7 +139,7 @@ You will now have a handy-dandy shortcut on your desktop: ![](RackMultipart20200
 
 Ubuntu is a version of the Linux operating system. It is widely used and well supported. If you are new to using Ubuntu, welcome. In the default set up (such as the one we walked through above) you will be logged on as the generic user called &#39;ubuntu&#39;. This is why you will see prompt look something like this:
 
-**ubuntu@ip-123-31-11-123:~$**
+`ubuntu@ip-123-31-11-123:~$`
 
 The tilde (~) indicates that you are in this user&#39;s home directory.
 
@@ -172,25 +169,25 @@ In truth, using virtual environments is a requirement, not a nice to have. Thing
 
 ### First, let&#39;s get things up to date:
 
-When you install a new EC2 instance you are not necessarily getting the most recent version of things, so first let&#39;s run an update.
+When you install a new EC2 instance you are not necessarily getting the most recent version of things, so first let's run an update.
 
-$ sudo apt-get update &amp;&amp; sudo apt-get upgrade &amp;&amp; sudo apt-get dist-upgrade
+`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
 
 This will run three sequential commands to find all out of date packages, download the required updates and then install them. You may need to agree to some installs as they will use up some of your &#39;hard drive&#39; on the cloud. This step may take a little while.
 
 Sometimes, we use Git to install the Taps and Targets we want to use, and Git may not yet be installed in your environment, so let&#39;s do that now:
 
-$ sudo apt install git
+`$ sudo apt install git`
 
 Once your tap and target are running you will want to run it on a schedule. For this we use Cron. So let&#39;s install that while we are at it:
 
-$ sudo apt-get install cron
+`$ sudo apt-get install cron`
 
 Again, you might find it is already on your system, in which case you are all set.
 
 Finally, let&#39;s run
 
-$ sudo apt install -y pylint
+`$ sudo apt install -y pylint`
 
 This installs a code analysis tool we will use to make sure taps and targets are working OK.
 
@@ -198,19 +195,18 @@ This installs a code analysis tool we will use to make sure taps and targets are
 
 Most computers will come with Python pre-installed. It is a very popular programming language. The Ubuntu instance we set up above for example comes preinstalled with version 3.8.2. We know this because running the command
 
-$ python3 --version
+`$ python3 --version`
 
 Returns the following:
 
-- Python 3.8.2
+> - Python 3.8.2
 
 Singer runs on Python 3.5.2, but I have found that installing that specific version returns OpenSSL issues. The issue was fixed in the 3.5.3 release, so it&#39;s a low risk approach to go with that incremental version.
 
 But in addition to Python we are going to need the development libraries, so let us install those first:
 
-$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-
-$ sudo apt-get install -y python3-dev libssl-dev
+`$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl`
+` $ sudo apt-get install -y python3-dev libssl-dev`
 
 ### OK, NOW can we install python?
 
@@ -222,49 +218,43 @@ But if any one of these modules is on a different version on your machine you wi
 
 To protect from that we create a virtual environment. All programs operating in that virtual environment will call on a specific set of versions for any required module.
 
-So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment. It&#39;s not as complicated as it sounds… bear with me.
+So for example, we might ask Singer to run the import Tap for Chargebee in one environment and push the data up to Google BigQuery using target-bigquery in a different environment. It's not as complicated as it sounds… bear with me.
 
-First let&#39;s install the module that allows us to manage versions of Python and these virtual environments. Virtual environments are managed with &#39;venv&#39; whereas Python versions are managed with &#39;pyenv&#39;. pyenv is a collection of shell scripts and [not installable with pip](https://github.com/pyenv/pyenv#installation) so we use this instead:
+First let's install the module that allows us to manage versions of Python and these virtual environments. Virtual environments are managed with &#39;venv&#39; whereas Python versions are managed with &#39;pyenv&#39;. pyenv is a collection of shell scripts and [not installable with pip](https://github.com/pyenv/pyenv#installation) so we use this instead:
 
-$ sudo apt-get install -y python3-venv
-
-$ curl https://pyenv.run | bash
+`$ sudo apt-get install -y python3-venv`
+`$ curl https://pyenv.run | bash`
 
 As the second installation completes, you will see a message that says &quot; Load pyenv automatically by adding the following to ~/.bashrc:&quot; … followed by a command. &#39;bashrc&#39; is a set of commands that Bash will run on startup. So we need to edit this file (~/.bashrc) to add a few lines. An easy way to do that is to run the following commands, in this order, one at a time:
 
-$ echo &#39;&#39; \&gt;\&gt; ~/.bashrc
-
-$ echo &#39;export PATH=&quot;/home/ubuntu/.pyenv/bin:$PATH&quot;&#39; \&gt;\&gt; ~/.bashrc
-
-$ echo &#39;eval &quot;$(pyenv init -)&quot;&#39; \&gt;\&gt; ~/.bashrc
-
-$ echo &#39;eval &quot;$(pyenv virtualenv-init -)&quot;&#39; \&gt;\&gt; ~/.bashrc
-
-$ exec &quot;$SHELL&quot;
+```$ echo '' >> ~/.bashrc
+$ echo 'export PATH="/home/ubuntu/.pyenv/bin:$PATH"' >> ~/.bashrc
+$ echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+$ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+$ exec "$SHELL"```
 
 I promise we are getting close to installing Python in a virtual environment!
 
-Let&#39;s see what versions we can install. Run this command:
+Let's see what versions we can install. Run this command:
 
-$ pyenv install --list | grep &quot; 3\.[5]&quot;
+`$ pyenv install --list | grep " 3\.[5]"`
 
 This will list all the versions of Python available to us, from 3.5.0 to 3.5.9. As mentioned earlier, we are going to go with 3.5.3. In order to run this in the virtual environment we need to have it available to us as an alternate version, so here goes – let&#39;s install Python.
 
-$ pyenv install 3.5.3
+`$ pyenv install 3.5.3`
 
 If you like to see all the gory details (or if the install hits an error the first time around) you can use this tweak to see all the details:
 
-$ pyenv install 3.5.3 -v
+`$ pyenv install 3.5.3 -v`
 
 Go grab a coffee - this will take a while. Once this is complete run
 
-$ pyenv versions
+`$ pyenv versions`
 
 And you will see the Python versions now available to us. All being well it will say:
 
-\* system (set by /home/ubuntu/.pyenv/version)
-
-3.5.3
+> \* system (set by /home/ubuntu/.pyenv/version)
+> 3.5.3
 
 ## Part 3: Installing, and then running the tap and the target
 
@@ -281,12 +271,12 @@ Once these steps are complete, we will be in a position to run the Tap or Target
 
 So here are what these six steps look like in practice. In this example I am going to use `tap-autopilot` which is an email automation platform. Depending on the tap you select, you will have to swap out tap-autopilot in the steps below with your Tap&#39;s reference as found at [https://www.singer.io/](https://www.singer.io/):
 
-1. python3 -m venv ~/.virtualenvs/tap-autopilot # create a virtual environment specific to this tap
-2. source ~/.virtualenvs/tap-autopilot/bin/activate # activate the virtual environment
-3. pyenv local 3.5.3
-4. pip install --upgrade pip wheel
-5. pip install tap-autopilot
-6. deactivate
+``` $ python3 -m venv ~/.virtualenvs/tap-autopilot # create a virtual environment specific to this tap
+ $ source ~/.virtualenvs/tap-autopilot/bin/activate # activate the virtual environment
+ $ pyenv local 3.5.3
+ $ pip install --upgrade pip wheel
+ $ pip install tap-autopilot
+ $ deactivate```
 
 There we go. The tap is installed. Now to run it, we would not call the program directly, but call it&#39;s virtual environment as follows:
 
