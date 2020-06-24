@@ -31,6 +31,9 @@ As part of this tutorial, I will show you how to:
 1. Set up an Amazon Web Services free tier virtual server using the EC2 service (You can skip this if you just want to work on your local machine, the next two steps would be the same there).
 2. Set up the right version of Python along with the other packages needed so that you can run Singer Taps and Targets
 3. Install a Tap and a Target and get the data flowing
+
+> Note that there is a separate tutorial for thos just looking to [work with Singer on their local MacOS machine](#taps-targets-and-python)
+
 I hope that by the end of this tutorial you will have a better understanding and familiarity with Singer and the confidence to move forward in configuring your own dataflows, and who knows, maybe even building your own Taps.
 
 So how much expertise is required to work your way through this tutorial?  Let me try and set the bar for you:
