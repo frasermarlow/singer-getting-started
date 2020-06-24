@@ -237,7 +237,7 @@ Go grab a coffee - this will take a while.  Once this is complete run
 
 And you will see the Python versions now available to us.  All being well it will say:
 
-> * system (set by /home/ubuntu/.pyenv/version)
+> \* system (set by /home/ubuntu/.pyenv/version)
 > 3.5.3
 
 
@@ -257,12 +257,12 @@ Once these steps are complete, we will be in a position to run the Tap or Target
 So here are what these six steps look like in practice. In this example I am going to use `_tap-autopilot_` which is an email automation platform.  Depending on the tap you select, you will have to swap out tap-autopilot in the steps below with your Tap’s reference as found at [https://www.singer.io/](https://www.singer.io/):
 
 ```
-$ python3 -m venv ~/.virtualenvs/tap-autopilot      # create a virtual environment specific to this tap
-$ source ~/.virtualenvs/tap-autopilot/bin/activate  # activate the virtual environment
-$ pyenv local 3.5.3
-$ pip install --upgrade pip wheel
-$ pip install tap-autopilot
-$ deactivate
+$ python3 -m venv ~/.virtualenvs/tap-autopilot      	# create a virtual environment specific to this tap
+$ source ~/.virtualenvs/tap-autopilot/bin/activate  	# activate the virtual environment
+$ pyenv local 3.5.3					# set the local version of Python
+$ pip install --upgrade pip wheel			# install Wheel
+$ pip install tap-autopilot				# install the Tap
+$ deactivate						# exit the virtual environment
 ```
 
 There we go.  The tap is installed.  Now to run it, we would not call the program directly, but call it’s virtual environment as follows:
@@ -332,17 +332,21 @@ Once this catalog file is generated, we can tweak it to our purpose.  Using ‘_
 
 Let me break that command down a bit for you:
 
-> ~/.virtualenvs/tap-autopilot/bin/tap-autopilot	This runs the Tap from inside its virtual environment…
-> --config ~/tap-autopilot-config/config.json 	… using the configuration file found at this location…
-> –discover  					… and runs the Tap in ;discover’ mode
-> > ~/tap-autopilot-config/catalog.json		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
+` ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`	This runs the Tap from inside its virtual environment…
+` --config ~/tap-autopilot-config/config.json` 	… using the configuration file found at this location…
+` –discover  				`	… and runs the Tap in ;discover’ mode
+` > ~/tap-autopilot-config/catalog.json`		… and write the output of that command to a new file in the ‘tap-autopilot-config’ folder called ‘catalog.json’
 
 All being well this command will result in the following message:
 
 > INFO Loading Schemas
+
 > INFO Loading schema for contacts
+
 > INFO Loading schema for lists
+
 > INFO Loading schema for smart_segments
+
 > INFO Loading schema for smart_segments_contacts
 
 As an aside, if you work with Taps on a regular basis, check out Chris Goddard’s ‘**Singer Discover Utility**’ found here: [https://github.com/chrisgoddard/singer-discover](https://github.com/chrisgoddard/singer-discover). It is designed to take a Singer-specification JSON catalog file and select which streams and fields to include.
@@ -354,9 +358,13 @@ So that all looks good. We can check that we now have a ‘_catalog.json_’ fil
 And this will return the following:
 
 > total 40
+
 > drwxrwxr-x 2 ubuntu ubuntu  4096 Jun 17 17:32 .
+
 > drwxr-xr-x 8 ubuntu ubuntu  4096 Jun 17 16:05 ..
+
 > -rw-rw-r-- 1 ubuntu ubuntu 27189 Jun 17 17:32 catalog.json
+
 > -rw-rw-r-- 1 ubuntu ubuntu    96 Jun 17 16:08 config.json
 
 So we now have a small config.json file and a larger catalog.json file. You can explore the catalog with 
