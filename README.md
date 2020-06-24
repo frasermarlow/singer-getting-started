@@ -1,15 +1,16 @@
 # Singer: Getting Started Guide
 
 ## Table of Contents
-### Running Singer on AWS EC2
-
-Part 1: Setting up your AWS EC2 instance
-
+### A: Running Singer on AWS EC2
+Part 1: [Setting up your AWS EC2 instance](#Why-use-EC2)
 Part 2: Setting up the environment
-
 Part 3: Installing, and then running the tap and the target
 
-### Running Singer on Mac OS
+### B: Running Singer on Mac OS
+
+------------------------------------------------------
+
+### Introduction
 
 Singer.io is a great framework for creating reliable data flows, to get data from point A to point B.  But if you are not an experienced data engineer or software developer, it is easy to hit a few stumbling blocks early in the process.  These teething issues are enough to make most data scientists or data analysts give up on Singer and go look for a more consumer-friendly solution (which is what Stitch is all about.) 
 
