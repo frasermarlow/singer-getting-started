@@ -1,4 +1,4 @@
-# Singer: Getting Started Guide
+# Singer: Getting Started Guide (for real beginners)
 
 ## Table of Contents
 ### A: Running Singer on AWS EC2 (using a PC)
