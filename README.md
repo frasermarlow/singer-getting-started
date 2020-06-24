@@ -13,6 +13,10 @@ Part 3: [Installing, and then running the tap and the target](#six-steps-to-a-ha
 
 ------------------------------------------------------
 
+### Context:
+
+This guide is aimed at people interested in using [the Singer.io framework](https://singer.io) for building data flows.  It is **a beginner level guide**.  The main instructions for using Singer can be found in the [official 'getting started' guide](https://github.com/singer-io/getting-started)
+
 ### Introduction
 
 Singer.io is a great framework for creating reliable data flows, to get data from point A to point B.  But if you are not an experienced data engineer or software developer, it is easy to hit a few stumbling blocks early in the process.  These teething issues are enough to make most data scientists or data analysts give up on Singer and go look for a more consumer-friendly solution (which is what Stitch is all about.) 
