@@ -9,7 +9,7 @@ Part 2: [Setting up the environment](#singer-assumptions)
 
 Part 3: [Installing, and then running the tap and the target](#six-steps-to-a-happy-tap)
 
-### B: [Running Singer on Mac OS](#taps-targets-and-python)
+### B: [Running Singer on Mac OS](#instructions-for-macos)
 
 ------------------------------------------------------
 
@@ -471,9 +471,8 @@ Congratulations.  If you made it this far, you have succeeded in getting a Singe
 
 ---------------------------------------------------
 
- 
+#### Instructions for MacOS
 # Running Singer on Mac OS
-#### Taps, Targets and Python
 
 Running Taps and Targets locally on a Mac is probably the most common scenario for testing and development, but getting Singer to work does require some set up.
 
