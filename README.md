@@ -100,17 +100,17 @@ Now it is time to connect to your new EC2 instance. For this we will use SSH (Se
 
 In Windows open the command prompt (Start menu, type ‘_cmd_’ and press enter).  A primer for [using SSH on Mac can be found here](https://osxtips.net/how-to-use-ssh-on-mac/).
 
-Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`
+Here you need to create the following command replacing the two values `<path-to-pem>` and `<server-ip>`.
 
 `ssh -i <path-to-pem> -v ubuntu@<server-ip>`
 
-So what is going on here?  In essence, you are instructing windows to use `ssh` to connect as user ‘ubuntu’ to the computer found at `<server-ip>`  using the Key file `<path-to-pem>`
+So what is going on here?  In essence, you are instructing windows to use `ssh` to connect as user ‘ubuntu’ to the computer found at `<server-ip>`  using the Key file `<path-to-pem>` .
 
-So where do we get these two variables?  Well `<path-to-pem>` is the file location of the _.pem_ key file we saved.  You may have simply saved it in your ‘_downloads_’ folder, but it’s usually a good idea to save it somewhere specific on your computer.
+So where do we get these two variables?  Well `<path-to-pem>` is the file location of the _.pem_ key file we just saved.  You may have simply saved it in your ‘_downloads_’ folder, but it’s usually a good idea to save it somewhere specific on your computer.
 
-`<server-ip>` is the public IP of the EC2 machine you are connecting to.  This is the IP we took note of earlier.
+`<server-ip>` is the public IP of the EC2 machine you are connecting to.  This is the IP we took note of earlier in this tutorial when we were working in the AWS console.
 
-In case you were wondering, the ‘-I’ and the ‘-v’ simply tell SSH that the next item in the command will be the .pem file and the server location respectively.  So you could equally run the command as 
+In case you were wondering, the ‘-I’ and the ‘-v’ simply tell SSH that the next item in the command will be the .pem file and the server location respectively.  So you could equally run the command as:  
 
 `ssh -v ubuntu@<server-ip> -i <path-to-pem>`
 
@@ -120,8 +120,8 @@ Here is an example of what the command would look like with those variables plug
 
 The first time you connect you will be presented with a warning message along these lines:
 
-> The authenticity of host '18.216.66.8 (18.216.66.8)' can't be established.  
-> ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.  
+> The authenticity of host '123.987.65.4 (123.987.65.4)' can't be established.  
+> ECDSA key fingerprint is SHA256:njFt5tDdv.GRgrtgrTGrbbRbt.  
 > Are you sure you want to continue connecting (yes/no)? 
 
 This is what we expect, as the secure connection has never been established before.  Simply type in ‘_yes_’ and proceed.
@@ -134,22 +134,22 @@ This is what we expect, as the secure connection has never been established befo
 2. For the location of the item, type in `C:\Windows\System32\cmd.exe /k <the SSH command above>`
 	So for example, the ‘location’ box would contain the following: 
 	`C:\Windows\System32\cmd.exe /k ssh -i C:\Users\myusername\singer-demo\pem\singer-demo.pem -v ubuntu@123.987.65.4`
-3.	Click Next.
+3.	Click _Next_.
 4.	Give the shortcut a name.
-5.	Click Finish
+5.	Click _Finish_
 You will now have a handy-dandy shortcut on your desktop: ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_10.png)
 
 **Shortcut on Mac** Details for doing the same on Mac can be found here: [Create quick-access ssh shortcuts](https://scotch.io/tutorials/how-to-create-an-ssh-shortcut)
 
 ### Working in Ubuntu
 
-Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  In the default set up (such as the one we walked through above) you will be logged on as the generic user called ‘*ubuntu*’.  This is why you will see prompt look something like this:
+Ubuntu is a version of the Linux operating system.  It is widely used and well supported.  If you are new to using Ubuntu, welcome.  By default you will be logged on as the generic user called ‘*ubuntu*’.  This is why the prompt will look something like this:
 
 `ubuntu@ip-123-31-11-123:~$`
 
 which is basically <user>@<computer>:<current-directory>
 
-The tilde (`~`) indicates that you are in this user’s home directory.
+The tilde (`~`) indicates that you are in this user’s home directory.  Since you are logged on as `ubuntu`, `~` is the same location as `/home/ubuntu/`
 
 Ubuntu is just a regular user, not the root user for the machine but can _act_ as the root user when needed.  This is why we will prepend the word ‘_sudo_’ to many commands, when elevated permissions are required.
 
