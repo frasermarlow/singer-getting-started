@@ -695,6 +695,6 @@ But for now I am going to create a new folder to hold my exported Autopilot data
 
 Now when I run the Tap and Target, I will get an output of all the Autopilot contacts since 2020-06-18 in .csv format.
 
-`$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
+`$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/target-csv/bin/target-csv`
 
  Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.
