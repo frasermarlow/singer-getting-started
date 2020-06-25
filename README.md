@@ -134,7 +134,7 @@ In the following sections of this guide, any line that looks like this is a comm
 
 Simply copy and paste the instruction in, without the *$*, which indicates a system prompt. So in the example above, type or copy/paste `cd ~`.
 
-In the Windows command prompt interface we're using, paste doesn't work. Once you copy a command from this tutorial, you can typically use the right mouse button to paste into the command window.
+In the Windows command prompt interface we're using, the '_paste_' funcyion will not work. Once you copy a command from this tutorial, you can instead use the right-mouse button to paste into the command window.
 
 Also in the shell, any characters after the hash character (`#`) is a comment. You'll occasionally see comments those after a command in this guide to add context.
 
@@ -146,17 +146,17 @@ The Singer documentation makes a few assumptions. First, it assumes that you hav
 
 Also, the documentation "recommends" using "virtual environments" for running each tap or target. A virtual environment ( or _venv_ for short) is a way of running individual programs in their own little bubbles, calling on their own little subsets of programs. You might have a tap that needs version 3.1 of a module, but a target that's asking for version 4.3. If you try to run them in the same environment you will run into dependency errors. A virtual environment allows for them each to maintain their own set of preferences. This makes configuration a bit more convoluted, but not at all unmanageable.
 
-In truth, using virtual environments is a requirement, not a nice-to-have. Things just will not work if you try to run everything in the same environment. 
+In truth, using virtual environments is a requirement, not a nice-to-have. Things just will not work if you try to run everything in the same environment.  
 
 Bearing in mind those considerations, let’s get our environment up to date.
 
 When you start running Ubuntu on a new EC2 instance, you won't have the most recent version of all the Ubuntu commands and utilities, but you can get them by running an update:
 
-`$ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade`
+`$ sudo apt update && sudo apt upgrade && sudo apt dist-upgrade`
 
 These three sequential commands find all out-of-date packages, download the required updates, and install them. You may be prompted to agree to some updates as they use up some of your "hard drive" space in the cloud. This step takes a little while.
 
-Sometimes, we use Git to install the taps and targets we want to use. Git may not yet be installed in your environment, so run:
+Sometimes, we use Git to install the taps and targets we want to use. Git is a distributed version-control system used to collaborate on and share source code. Git may not yet be installed in your environment, so run:
 
 `$ sudo apt install git`
 
@@ -312,6 +312,8 @@ and paste in (right mouse click)
 }
 ```
 
+The `start_date` variable tells the Tap the first date from which we want to start the import, so any data created before that date will be ignored.
+
 Next, run the tap in "discovery mode," in which it connects to the source and figures out what data can be retrieved. Running a tap in discovery mode generates a catalog file with all the data that we can pull from the source system. After we generate a catalog file we can tweak it to our purpose. Creating a catalog by using discovery mode is much easier than writing a catalog from scratch. Here's the command:
 
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --discover  > ~/tap-autopilot-config/catalog.json`
@@ -347,7 +349,11 @@ which should return a directory listing like:
 
 So we now have a small config.json file and a larger catalog.json file, which you can open in your favorite editor or in this collapsable [JSON explorer](http://www.bodurov.com/JsonFormatter/). The Singer documentation can help you understand how catalog files are structured.
 
-One challenge with Singer catalog files is that they often default to loading nothing and expect you to explicitly check off the tables or data types you want, so we need to edit the catalog.json file and select which "streams" we want to activate. We do this by adding the property `"selected": true` to the stream’s _metadata_ object. For this example, we can browse through the catalog.json file until we find the stream's `metadata` array, then append the `"selected": true`   key/value pair to the metadata object for each stream we want to import:
+One challenge with Singer catalog files is that they often default to loading nothing and expect you to explicitly check off the tables or data types you want, so we need to edit the catalog.json file and select which data streams we want to activate. 
+
+Streams are the sub-categories of data that we want to extract.  So in a CRM system, we migh thave one 'stream' for accounts, one for contacts, one for orders etc.
+
+We select streams to replicate by adding the property `"selected": true` to the stream’s _metadata_ object. For this example, we can browse through the catalog.json file until we find the stream's `metadata` array, then append the `"selected": true`   key/value pair to the metadata object for each stream we want to import:
 
 ```
 "metadata": [
@@ -401,7 +407,9 @@ Now when we run the tap and target, we should get a file that contains all the A
 
 ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_7.jpg)
 
-Congratulations — if you made it this far, you have succeeded in getting a Singer tap up and running.
+Congratulations — if you made it this far, you have succeeded in getting a Singer tap up and running.  You should see your newly created .csv files in your `autopilot-export` folder by running
+
+`$ ls -la`
 
 If you'd like to build your own tap, read [this post by developer Jeff Huth](https://www.stitchdata.com/blog/how-to-build-a-singer-tap-infographic/).
 
@@ -515,6 +523,8 @@ and paste in the Key:
     "start_date": "2020-05-01T00:00:00Z"
 }
 ```
+
+The `start_date` variable tells the Tap the first date from which we want to start the import, so any data created before that date will be ignored.
 
 Next, run the tap in "discovery mode," in which it connects to the source and figures out what data can be retrieved. Running a tap in discovery mode generates a catalog file with all the data that we can pull from the source system. After we generate a catalog file we can tweak it to our purpose. Creating a catalog by using discovery mode is much easier than writing a catalog from scratch. Here's the command:
 
