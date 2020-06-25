@@ -476,11 +476,20 @@ Congratulations.  If you made it this far, you have succeeded in getting a Singe
 
 Running Taps and Targets locally on a Mac is probably the most common scenario for testing and development, but getting Singer to work does require some set up.
 
-For instance, Mac OS X comes with Python 2.7 out of the box, but Singer runs on Python 3.5. and separate virtual environments are recommended for each Tap and Target you use.  But don’t worry, you do not need much familiarity with Python to get up and running.  The following guide should get you there.
+For instance, Singer runs on Python 3.5. and separate virtual environments are recommended for each Tap and Target you use.  
+
+But the [macOS Catalina 10.15 Release Notes](https://developer.apple.com/documentation/macos-release-notes/macos-catalina-10_15-release-notes) tell us that:
+
+> Future versions of macOS won’t include scripting language runtimes by default, and might require you to install additional packages.  
+> Use of Python 2.7 isn’t recommended as this version is included in macOS for compatibility with legacy software. Future versions of macOS won’t include Python 2.7. Instead, it’s recommended that you run python3 from within Terminal.  
+
+But don’t worry, you do not need much familiarity with Python to get up and running.  The following guide should get you there.
 
 To work on Singer, we are going to use the Mac Terminal which comes with Mac OS by default.
 
 So let’s start by opening the command line Terminal (Finder > Applications > Terminal)
+
+#### "Relax. Don't worry. And have a homebrew." - Charlie Papazian
 
 First, we install Homebrew, the free software package management system which makes it easy to install all the other modules required to run Singer.
 
@@ -507,6 +516,8 @@ So now we have Python3 running, we will install an application that allows us to
 And using PyEnv we can now install the required version of Python3 we need, namely 3.5.3:
 
 `$ pyenv install 3.5.3`
+
+#### Going virtual
 
 Great.  Next we are going to install an application that allows us to create ‘virtual environments’.  You can think of these as containers to run a program in, each container setting up its own set of modules to support the core program.  This is important because different taps or targets may have different dependencies to run smoothly, and these may conflict from one tap to the next.
 
