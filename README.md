@@ -268,13 +268,12 @@ Go grab a coffee - this will take a while.  Once this is complete run
 
 And you will see the Python versions now available to us.  All being well it will say:
 
-> \* system (set by /home/ubuntu/.pyenv/version)
-
+> \* system (set by /home/ubuntu/.pyenv/version).  
 > 3.5.3
 
 
-### Part 3: Installing, and then running the tap and the target
-#### Six steps to a happy tap
+### Part 3: Installing, and then running the Tap and the Target
+#### Six steps to a happy Singer Tap
 In order to install either a Tap or a Target, we follow these steps:
 
 1)	Create a virtual environment for the Tap or Target
@@ -297,7 +296,7 @@ $ pip install tap-autopilot				# install the Tap
 $ deactivate						# exit the virtual environment
 ```
 
-There we go.  The tap is installed.  Now to run it, we would not call the program directly, but call it’s virtual environment as follows:
+There we go.  The tap is installed.  Now to run it, we would not call the program directly, but call its virtual environment as follows:
 
 `$ ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`
 
@@ -305,7 +304,7 @@ Of course, right now that command won’t do anything as we don’t have a desti
 
 > tap-autopilot: error: the following arguments are required: -c/--config
 
-To get the data flow working we need both a destination for our data (known as a ‘target’), as well as a bit of configuration for the Tap.  Let’s install the Target first as the steps are very similar as for the Tap.  In this example I am going to export my Autopilot data to .csv format using target-csv.  We will simply repeat steps 1 to 6 above.
+To get the data flow working we need both a destination for our data (known as a ‘Target’), as well as a bit of configuration for the Tap.  Let’s install the Target first as the steps are very similar as for the Tap.  In this example I am going to export my Autopilot data to .csv format using **target-csv**.  We will simply repeat steps 1 to 6 above.
 
 ```
 $ python3 -m venv ~/.virtualenvs/target-csv      # create a virtual environment specific to this tap
@@ -697,4 +696,5 @@ Now when I run the Tap and Target, I will get an output of all the Autopilot con
 
 `$ ~/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/target-csv/bin/target-csv`
 
- Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.
+ Congratulations.  If you made it this far, you have succeeded in getting a Singer Tap up and running on MacOS.  You can check that your `.csv` files were created in your current directory by typing in 
+ `$ ls -la`
