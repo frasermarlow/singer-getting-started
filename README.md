@@ -139,7 +139,7 @@ This is what we expect, as the secure connection has never been established befo
 5.	Click Finish
 You will now have a handy-dandy shortcut on your desktop: ![](https://www.stitchdata.com/images/singer-getting-started-guide/singer-getting-started-guide_10.png)
 
-**Shortcut on Mac** Details for doing the same on Mac can be found here: [Create quick-access ssh shortcuts](http://hints.macworld.com/article.php?story=20060810042411590)
+**Shortcut on Mac** Details for doing the same on Mac can be found here: [Create quick-access ssh shortcuts](https://scotch.io/tutorials/how-to-create-an-ssh-shortcut)
 
 ### Working in Ubuntu
 
