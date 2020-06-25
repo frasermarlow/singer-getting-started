@@ -1,3 +1,5 @@
+![](https://www.stitchdata.com/images/singer-getting-started-guide/singer_logo.gif)
+
 # Singer getting started guide
 
 ## Table of contents
