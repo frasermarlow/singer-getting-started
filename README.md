@@ -3,7 +3,7 @@
 # Singer getting started guide
 
 ## Table of contents
-### A: Running Singer on AWS EC2 (using a PC)
+### A: Running Singer on AWS EC2
 
 Part 1: [Setting up your AWS EC2 instance](#Introduction)
 
@@ -34,13 +34,13 @@ To work your way through this tutorial
 * You will need a credit card for authorization purposes, but don’t worry – you don't need to spend a dime to complete this tutorial.
 
 ## Part 1: Setting up your AWS EC2 instance
-These instructions assume you're working on a Windows or Linux PC to manage your EC2 instance but you could also follow along on a Mac using the Terminal app.
+These instructions assume you're working on a Windows machine to manage your EC2 instance.  If you are working on a Mac locally, you will find [specific instructions here](#taps-targets-and-python).
 
 ### Why use EC2?
 
 EC2 stands for "Elastic Compute Cloud." It's an AWS service that lets you boot up a virtual computer in the cloud, log in to it using SSH, and run applications using a command-line interface. EC2 instances are stand-alone and free for 12 months for the really small instances. If things fall apart when you're running one you can just terminate an instance and boot up a fresh one in a couple of minutes. (Note that while starting an instance takes only a couple of minutes, the new instance’s IP address may differ from the old one's, so you may need to update your connection details.)
 
-As we mentioned above, you can run Singer on a local PC or Mac as long as you can run Python 3 on your machine, but we like to work with AWS EC2 instances. If you're planning on setting up a data flow for your company, or something that will run on a schedule, then having a stand-alone EC2 virtual machine running the Singer tap has many advantages. EC2 is good for sandboxing, and programs install quickly by virtue of being on the AWS network. On the downside, the free instances are very small, so they run taps very slowly. This said, once your tap is working as you want, you can scale up the instance you're working on – no need to rebuild anything.
+As we mentioned above, you can run Singer on a local Windows or Mac computer as long as you can run Python 3 on your machine, but we like to work with AWS EC2 instances. If you're planning on setting up a data flow for your company, or something that will run on a schedule, then having a stand-alone EC2 virtual machine running the Singer tap has many advantages. EC2 is good for sandboxing, and programs install quickly by virtue of being on the AWS network. On the downside, the free instances are very small, so they run taps very slowly. This said, once your tap is working as you want, you can scale up the instance you're working on – no need to rebuild anything.
 
 ### Setting up an EC2 instance
 
