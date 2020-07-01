@@ -464,21 +464,21 @@ Now we have our Python development environment set up, and we can go ahead and d
 
 In this example we'll use _tap-autopilot_, which connects with the [Autopilot](https://www.autopilothq.com/) email automation platform. Swap out `tap-autopilot` in the steps below with your tap’s reference, as found at [https://www.singer.io/](https://www.singer.io/). Note that the command-line prompt changes to _(tap-autopilot)$_ when we activate the virtual environment.
 
-`$ virtualenv -p python3 tap-autopilot`
-`$ source tap-autopilot/bin/activate`
-`(tap-autopilot)$ pyenv local 3.5.3`
-`(tap-autopilot)$ pyenv versions # to confirm install and version assigned`
-`(tap-autopilot)$ pip install tap-autopilot`
-`(tap-autopilot)$ deactivate`
+`$ virtualenv -p python3 tap-autopilot`  
+`$ source tap-autopilot/bin/activate`  
+`(tap-autopilot)$ pyenv local 3.5.3`  
+`(tap-autopilot)$ pyenv versions # to confirm install and version assigned`  
+`(tap-autopilot)$ pip install tap-autopilot`  
+`(tap-autopilot)$ deactivate`  
 
 Repeat this process to install the target that allows us to pipe data to .csv files on our local machine, called ‘target-csv’.
 
-`$ virtualenv -p python3 target-csv`
-`$ source target-csv /bin/activate`
-`(target-csv)$ pyenv local 3.5.3`
-`(target-csv)$ pyenv versions # to confirm install and version assigned`
-`(target-csv)$ pip install tap-autopilot`
-`(target-csv)$ deactivate`
+`$ virtualenv -p python3 target-csv`  
+`$ source target-csv /bin/activate`  
+`(target-csv)$ pyenv local 3.5.3`  
+`(target-csv)$ pyenv versions # to confirm install and version assigned`  
+`(target-csv)$ pip install tap-autopilot`  
+`(target-csv)$ deactivate`  
 
 Now we need to configure the tap and target. Each tap can be a bit different, and I recommend visiting the GitHub repo for the tap you're working with to see the exact details. You can find the link for any tap on the Singer website, or by googling “singer-io tap-name” – for example “singer-io tap-adwords.” In our case the repo is at https://github.com/singer-io/tap-autopilot. 
 
@@ -498,7 +498,7 @@ This just means "change the current active directory to my home folder."
 
 Now let’s create a directory for our config files and change to that directory. You can choose any name you like, but naming it tap-<tap name>-config is a good convention.
 
-`$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’`
+`$ mkdir tap-autopilot-config  # make the directory called ‘tap-autopilot-config’`  
 `$ cd tap-autopilot-config     # enter that directory`
 
 Now let's create the JSON files that the tap will use to set the parameters for the data import. The first one is config.json, which contains the environment variables for the tap, including the access token we need to use to access the Autopilot instance. As per the tap instructions, create a file in JSON format with the following details:
@@ -534,10 +534,10 @@ Next, run the tap in "discovery mode," in which it connects to the source and fi
 
 Let's break that command down:
 
-` ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`	This runs the tap from inside its virtual environment ...
-` --config ~/tap-autopilot-config/config.json` 	    ... using the configuration file found at this location ...
-` –discover  				`	    ... and runs the tap in discovery mode ...
-` > ~/tap-autopilot-config/catalog.json`	    ... and writes the output of that command to a new file in the tap-autopilot-config folder called catalog.json
+` ~/.virtualenvs/tap-autopilot/bin/tap-autopilot`	This runs the tap from inside its virtual environment ...  
+` --config ~/tap-autopilot-config/config.json` 	    ... using the configuration file found at this location ...  
+` –discover  				`	    ... and runs the tap in discovery mode ...  
+` > ~/tap-autopilot-config/catalog.json`	    ... and writes the output of that command to a new file in the tap-autopilot-config folder called catalog.json  
 
 All being well the command returns the messages:
 
@@ -608,8 +608,8 @@ Now return to the home directory:
 
 When you run target-csv, as we're doing, Singer write all the output files in whatever local directory you're in. (Other targets might write data to a database or a remote destination.) Let's create a directory to hold the exported Autopilot data and change to that directory:
 
-`$ mkdir autopilot-export`
-`$ cd autopilot-export`
+`$ mkdir autopilot-export`  
+`$ cd autopilot-export`  
 
 Now when we run the tap and target, we should get a file that contains all the Autopilot contacts since 2020-06-18 in .csv format.
 
