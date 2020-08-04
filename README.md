@@ -142,6 +142,8 @@ Also in the shell, any characters after the hash character (`#`) is a comment. Y
 
 ### Part 2: Setting up the environment
 
+> Note - for those of you comfortable working in Ubuntu, feel free to copy and run the Bash file `ubuntu-singer-setup.sh` found in this repo, and skip to [Installing and running the tap and the target](#six-steps-to-a-happy-tap).
+
 #### Singer assumptions
 
 The Singer documentation makes a few assumptions. First, it assumes that you have a development environment running. Singer depends on a bunch of other programs or modules that you need to install before Singer will work.
