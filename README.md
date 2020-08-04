@@ -160,6 +160,10 @@ When you start running Ubuntu on a new EC2 instance, you won't have the most rec
 
 These three sequential commands find all out-of-date packages, download the required updates, and install them. You may be prompted to agree to some updates as they use up some of your "hard drive" space in the cloud. This step takes a little while.
 
+It helps to get Pip (the package installer for Python) up to date as well:
+
+`$ sudo pip install --upgrade pip`
+
 Sometimes, we use Git to install the taps and targets we want to use. Git is a distributed version-control system used to collaborate on and share source code. Git may not yet be installed in your environment, so run:
 
 `$ sudo apt install git`
@@ -178,7 +182,7 @@ And we want to install the Pylint code analysis tool so we can make sure taps an
 
 `$ sudo apt install -y pylint`
 
-Then there's Python itself. The Ubuntu instance we set up comes preinstalled with Python version 3.8.2. We know this because running the command 
+Then there's Python itself, or more precisely the specific version of Python we need per tap or target. The Ubuntu instance we set up comes preinstalled with Python version 3.8.2. We know this because running the command 
 
 `$ python3 --version`
 
