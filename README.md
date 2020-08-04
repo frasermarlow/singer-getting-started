@@ -162,7 +162,7 @@ These three sequential commands find all out-of-date packages, download the requ
 
 It helps to get Pip (the package installer for Python) up to date as well:
 
-`$ sudo pip install --upgrade pip`
+`$ pip install --upgrade pip`
 
 Sometimes, we use Git to install the taps and targets we want to use. Git is a distributed version-control system used to collaborate on and share source code. Git may not yet be installed in your environment, so run:
 
