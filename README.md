@@ -136,9 +136,11 @@ In the following sections of this guide, any line that looks like this is a comm
 
 Simply copy and paste the instruction in, without the *$*, which indicates a system prompt. So in the example above, type or copy/paste `cd ~`.
 
-In the Windows command prompt interface we're using, the '_paste_' funcyion will not work. Once you copy a command from this tutorial, you can instead use the right-mouse button to paste into the command window.
+A bit later on we will be using 'virtual environments' - don't worry if that is confusing right now, we will come back to it.  But when we are in a virtual environment the prompt may look like this:  `(tap-autopilot) $`  or even `(target-csv) ubuntu@DESKTOP-CLLCE1R:~$` or somesuch.  The main point is that the command is the part in the instruction that comes after the `$` sign.  The bit before the `$` just gives you context on where that command will be executed.
 
-Also in the shell, any characters after the hash character (`#`) is a comment. You'll occasionally see comments those after a command in this guide to add context.
+In the Windows command prompt interface we're using, the '_paste_' function will not work. Once you copy a command from this tutorial, you can instead use the right-mouse button to paste into the command window.
+
+Also in the shell, any characters after the hash character (`#`) is a comment. You'll occasionally see comments those after a command in this guide to add context, but they have no effect in terms of a command.
 
 ### Part 2: Setting up the environment
 
@@ -253,10 +255,10 @@ Here's what these six steps look like in practice. In this example we use _tap-a
 ```
 $ python3 -m venv ~/.virtualenvs/tap-autopilot      	# create a virtual environment specific to this tap
 $ source ~/.virtualenvs/tap-autopilot/bin/activate  	# activate the virtual environment
-$ pyenv local 3.5.3					# set the local version of Python
-$ pip install --upgrade pip wheel			# install wheel
-$ pip install tap-autopilot				# install the tap
-$ deactivate						# exit the virtual environment
+(tap-autopilot) $ pyenv local 3.5.3					# set the local version of Python
+(tap-autopilot) $ pip install --upgrade pip wheel			# install wheel
+(tap-autopilot) $ pip install tap-autopilot				# install the tap
+(tap-autopilot) $ deactivate						# exit the virtual environment
 ```
 
 There we go — the tap is installed. To run it, we don't call the program directly, but instead call its virtual environment:
@@ -274,10 +276,10 @@ Let’s install the target first. The steps are similar to those for the tap. In
 ```
 $ python3 -m venv ~/.virtualenvs/target-csv      # create a virtual environment specific to this tap
 $ source ~/.virtualenvs/target-csv/bin/activate  # activate the virtual environment
-$ pyenv local 3.5.3
-$ pip install --upgrade pip wheel
-$ pip install target-csv
-$ deactivate
+(target-csv) $ pyenv local 3.5.3
+(target-csv) $ pip install --upgrade pip wheel
+(target-csv) $ pip install target-csv
+(target-csv) $ deactivate
 ```
 
 We now have a tap and a target installed. Now we need to configure the tap. Each tap can be a bit different, so you should visit the GitHub repo for the tap you're working with and read its README.md file. In our case the repo is at [https://github.com/singer-io/tap-autopilot](https://github.com/singer-io/tap-autopilot). You can find the links for other taps on the Singer website, or by googling "_singer-io tap-name_" – for example "[_singer-io tap-adwords_](https://www.google.com/search?q=singer-io+tap-adwords)."
