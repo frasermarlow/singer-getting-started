@@ -482,10 +482,10 @@ In this example we'll use _tap-autopilot_, which connects with the [Autopilot](h
 Repeat this process to install the target that allows us to pipe data to .csv files on our local machine, called ‘target-csv’.
 
 `$ virtualenv -p python3 target-csv`  
-`$ source target-csv /bin/activate`  
+`$ source target-csv/bin/activate`  
 `(target-csv)$ pyenv local 3.5.3`  
 `(target-csv)$ pyenv versions # to confirm install and version assigned`  
-`(target-csv)$ pip install tap-autopilot`  
+`(target-csv)$ pip install target-csv`  
 `(target-csv)$ deactivate`  
 
 Now we need to configure the tap and target. Each tap can be a bit different, and I recommend visiting the GitHub repo for the tap you're working with to see the exact details. You can find the link for any tap on the Singer website, or by googling “singer-io tap-name” – for example “singer-io tap-adwords.” In our case the repo is at https://github.com/singer-io/tap-autopilot. 
