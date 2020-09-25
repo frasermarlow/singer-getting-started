@@ -234,7 +234,7 @@ to see the Python versions now available. All being well it will say:
 
 > 3.5.3
 
-Note that the steps only have to be done once in your development environment, and you don't have to repeat them for each tap.
+Note that the steps listed above only have to be done once in your development environment, and you don't have to repeat them for each tap.
 
 
 ### Part 3: Installing and running a tap and target
