@@ -152,7 +152,7 @@ The Singer documentation makes a few assumptions. First, it assumes that you hav
 
 Also, the documentation "recommends" using "virtual environments" for running each tap or target. A virtual environment ( or _venv_ for short) is a way of running individual programs in their own little bubbles, calling on their own little subsets of programs. You might have a tap that needs version 3.1 of a module, but a target that's asking for version 4.3. If you try to run them in the same environment you will run into dependency errors. A virtual environment allows for them each to maintain their own set of preferences. This makes configuration a bit more convoluted, but not at all unmanageable.
 
-In truth, using virtual environments is a requirement, not a nice-to-have. Things just will not work if you try to run everything in the same environment. If you are brand new to virtual environments in Python3, check out [this YouTube tutorial](https://www.youtube.com/watch?v=Kg1Yvry_Ydk). 
+In truth, using virtual environments is a requirement, not a nice-to-have. Things just will not work if you try to run everything in the same environment. If you are brand new to virtual environments in Python3, check out [this YouTube tutorial](https://www.youtube.com/watch?v=Kg1Yvry_Ydk).
 
 Bearing in mind those considerations, let’s get our environment up to date.
 
@@ -192,7 +192,7 @@ Returns
 
 > Python 3.8.2
 
-Singer runs on Python 3.5.2, but that specific version can return OpenSSL issues. The issue was fixed in the 3.5.3 release, so it’s a low-risk approach to use that version. But before we do that, we need to deal with the issue of virtual environments.
+Singer runs on Python 3.5.2, but that specific version can return OpenSSL issues. The issue was fixed in the 3.5.3 release, so it’s a low-risk approach to use that version. But before we do that, we need to deal with the issue of virtual environments.  Again, if you are brand new to virtual environments in Python3, check out [this YouTube tutorial](https://www.youtube.com/watch?v=Kg1Yvry_Ydk).
 
 We need to manage both virtual environments themselves, using a utility called venv, and versions of Python within those environment, using pyenv:
 
@@ -233,6 +233,8 @@ to see the Python versions now available. All being well it will say:
 > \* system (set by /home/ubuntu/.pyenv/version)
 
 > 3.5.3
+
+Note that the steps only have to be done once in your development environment, and you don't have to repeat them for each tap.
 
 
 ### Part 3: Installing and running a tap and target
