@@ -408,7 +408,7 @@ Now return to the home directory:
 
 `$ cd ~`
 
-When you run target-csv, as we're doing, Singer write all the output files in whatever local directory you're in. (Other targets might write data to a database or a remote destination.) Let's create a directory to hold the exported Autopilot data and change to that directory:
+When you run target-csv, as we're doing, Singer will write all the output files to whatever local directory you're in. (Other targets might write data to a database or a remote destination.) Let's create a directory to hold the exported Autopilot data and change to that directory:
 
 `$ mkdir autopilot-export`
 `$ cd autopilot-export`
