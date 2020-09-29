@@ -273,7 +273,7 @@ At this point that command won't do anything because we don't have a destination
 
 To get the data flow working we need a destination for our data (a target), and we need to do a bit of configuration for the tap.  
 
-Let’s install the target first. The steps are similar to those for the tap. In this example we load Autopilot data to .csv format using target-csv:
+But first let’s install the target. The steps are similar to those for the tap. In this example we load Autopilot data to .csv format using target-csv:
 
 ```
 $ python3 -m venv ~/.virtualenvs/target-csv      # create a virtual environment specific to this tap
@@ -284,7 +284,33 @@ $ source ~/.virtualenvs/target-csv/bin/activate  # activate the virtual environm
 (target-csv) $ deactivate
 ```
 
-We now have a tap and a target installed. Now we need to configure the tap. Each tap can be a bit different, so you should visit the GitHub repo for the tap you're working with and read its README.md file. In our case the repo is at [https://github.com/singer-io/tap-autopilot](https://github.com/singer-io/tap-autopilot). You can find the links for other taps on the Singer website, or by googling "_singer-io tap-name_" – for example "[_singer-io tap-adwords_](https://www.google.com/search?q=singer-io+tap-adwords)."
+So now we can invoke the target in its own virtual environment using 
+
+`$ ~/.virtualenvs/target-csv/bin/target-csv`
+
+So let's do a quick manual test of this to make sure all is well with the target.  We are going to manually write a dummy tap output to `stdOut` and push it to the target as follows:
+
+```
+printf '{"type":"SCHEMA", "stream":"hello","key_properties":[],"schema":{"type":"object", "properties":{"value":{"type":"string"}}}}\n{"type":"RECORD","stream":"hello","schema":"hello","record":{"value":"world"}}\n' | ~/.virtualenvs/target-csv/bin/target-csv
+```
+If all goes well you will just the the prompt character back, and it will look as if nothing happened.  But if you check your files ( with `$ ls` ) you should see a new .csv file called something like `hello-20200928T212555.csv`.
+
+If you go and edit the file using (for example) 
+
+`$ nano hello-20200928T212555.csv`
+
+you will see that the file simply has two lines of text that read:
+
+```
+value
+world
+```
+
+Not only does this confirm your target is working as it should, it also gives you a way to manually play around the data.  You can now see how tap output data in JSON gets written to a new .csv file by the target.  So feel free to play around with that command and throw some other data at `target-csv` and see what results you get.
+
+#### Configuring the tap
+
+OK. We have a tap and a target installed. Now we need to configure the tap. Each tap can be a bit different, so you should visit the GitHub repo for the tap you're working with and read its README.md file. In our case the repo is at [https://github.com/singer-io/tap-autopilot](https://github.com/singer-io/tap-autopilot). You can find the links for other taps on the Singer website, or by googling "_singer-io tap-name_" – for example "[_singer-io tap-adwords_](https://www.google.com/search?q=singer-io+tap-adwords)."
 
 Create a directory where you can keep configuration files organized. Start in the home directory:
 
