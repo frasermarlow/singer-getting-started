@@ -308,6 +308,26 @@ world
 
 Not only does this confirm your target is working as it should, it also gives you a way to manually play around the data.  You can now see how tap output data in JSON gets written to a new .csv file by the target.  So feel free to play around with that command and throw some other data at `target-csv` and see what results you get.
 
+If you don't care too much to know how this works, you can jump to the next heading "Configuring the tap".  But for those of you who are interested, what we just did is write two separate lines to Standard output using the `printf` command.
+
+The first line provided `target-csv` with a record of the [SCHEMA](https://github.com/singer-io/getting-started/blob/master/docs/SPEC.md#schema-message) (or instructions on how our data in the subsequent records will be structured).
+
+`{"type":"SCHEMA", "stream":"hello","key_properties":[],"schema":{"type":"object", "properties":{"value":{"type":"string"}}}}`
+
+and notice that in stdOut we mark the end of the line with `\n`
+
+We then provided tap-csv with a [RECORD](https://github.com/singer-io/getting-started/blob/master/docs/SPEC.md#record-message) that follows the above-mentioned schema:
+
+`{"type":"RECORD","stream":"hello","schema":"hello","record":{"value":"world"}}`
+
+and again, finish the line with `\n`
+
+So we could continue to feed data to target-csv in this fashion with 
+
+`{SCHEMA}\n{RECORD}\n{RECORD}\n{RECORD}...  `
+
+The only other type of message we use in Singer standard is [STATE](https://github.com/singer-io/getting-started/blob/master/docs/SPEC.md#state-message) which tracks where the tap and target last left off so we can neatly pick up on our next run.
+
 #### Configuring the tap
 
 OK. We have a tap and a target installed. Now we need to configure the tap. Each tap can be a bit different, so you should visit the GitHub repo for the tap you're working with and read its README.md file. In our case the repo is at [https://github.com/singer-io/tap-autopilot](https://github.com/singer-io/tap-autopilot). You can find the links for other taps on the Singer website, or by googling "_singer-io tap-name_" – for example "[_singer-io tap-adwords_](https://www.google.com/search?q=singer-io+tap-adwords)."
