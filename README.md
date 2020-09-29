@@ -293,7 +293,7 @@ So let's do a quick manual test of this to make sure all is well with the target
 ```
 printf '{"type":"SCHEMA", "stream":"hello","key_properties":[],"schema":{"type":"object", "properties":{"value":{"type":"string"}}}}\n{"type":"RECORD","stream":"hello","schema":"hello","record":{"value":"world"}}\n' | ~/.virtualenvs/target-csv/bin/target-csv
 ```
-If all goes well you will just the the prompt character back, and it will look as if nothing happened.  But if you check your files ( with `$ ls` ) you should see a new .csv file called something like `hello-20200928T212555.csv`.
+If all goes well you will just the the prompt character back, and it will look as if nothing happened (or maybe you will see the message `INFO Sending version information to singer.io. To disable sending anonymous usage data, set the config parameter "disable_collection" to true`).  But if you check your files ( with `$ ls` ) you should see a new .csv file called something like `hello-20200928T212555.csv`.
 
 If you go and edit the file using (for example) 
 
@@ -327,6 +327,8 @@ So we could continue to feed data to target-csv in this fashion with
 `{SCHEMA}\n{RECORD}\n{RECORD}\n{RECORD}...  `
 
 The only other type of message we use in Singer standard is [STATE](https://github.com/singer-io/getting-started/blob/master/docs/SPEC.md#state-message) which tracks where the tap and target last left off so we can neatly pick up on our next run.
+
+So if you are looking to learn more about how taps and targets work, this is a good exercise to manually construct json records and feed them to your target.  If you provide misformed json it will also help you learn the type of error messages you can expect.
 
 #### Configuring the tap
 
