@@ -488,7 +488,7 @@ Now open your cron table by typing
 
 `crontab -e`
 
-You will get a message informing you that `no crontab for ubuntu - using an empty one` - which is fine.
+You will get a message informing you that there is `no crontab for ubuntu - using an empty one` - which is fine.
 The system will then typically invite you to pick a text editor. Pick the one you like best.
 When the crontab file opens, it will give you some instructions (as comments in the file).  Cron will run on the server's clock so bear this in mind when scheduling.
 
