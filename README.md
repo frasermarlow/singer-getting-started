@@ -11,6 +11,8 @@ Part 2: [Setting up the environment](#singer-assumptions)
 
 Part 3: [Installing and running the tap and the target](#six-steps-to-a-happy-tap)
 
+Bonus: [Scheduling using cron](#setting-up-a-tap-replication-schedule-using-cron)
+
 ### B: [Running Singer on macOS](#taps-targets-and-python)
 
 ------------------------------------------------------
