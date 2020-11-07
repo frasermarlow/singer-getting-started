@@ -497,7 +497,7 @@ cron uses a format for time schedules that may appear unfamiliar but is actually
 
 `16 */12 * * * ~/.virtualenvs/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
 
-This will run the tap and export the results to a local .csv file every 12 hours.
+This will run the tap and export the results to a local .csv file every 12 hours (16 minutes after the hour).
 
 This is pretty barebones.  Once you have mastered this you might want to put the command in a bash file, along with some other commands and call that instead using 
 
