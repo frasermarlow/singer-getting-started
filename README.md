@@ -471,6 +471,40 @@ Congratulations — if you made it this far, you have succeeded in getting a Sin
 
 `$ ls -la`
 
+## Setting up a tap replication schedule using cron
+
+OK, so you can run the tap manually.  That's great.  Next step is making sure you don't have to get up at 2 AM, log into the server and run the command.  So we are going to schedule the tap to run using *cron*.  Cron is simply derived from the Greek word for time (chronos).
+
+If you are not familiar with cron, is a neat tool that simply allows us to set up a schedule at which the server will execute any given command.  So you might run the tap daily, weekly or every minute if you like (but there are lots of good reasons *not* to do that, namely cost API limits to name just two). 
+
+And cron is pretty simple to set up.  There are lots of good tutorials online such as [this one](https://www.hostinger.com/tutorials/cron-job).
+
+In its simplist form, we just need to edit our crontab (cron table) file and add a single line that will execute the same command we were running manually.  
+
+To do this, first make sure you are not in a `venv` (look at your prompt - if you see your virtual environment in parenthesis at the beginning of the line, just type 'deactivate')
+
+Now open your cron table by typing 
+
+`crontab -e`
+
+You will get a message informing you that `no crontab for ubuntu - using an empty one` - which is fine.
+The system will then typically invite you to pick a text editor. Pick the one you like best.
+When the crontab file opens, it will give you some instructions.  If the precise timing of your replications is important, remember that cron will run on the server's clock (obviously) so bear this in mind.
+
+Next we just enter a single line at the end of the crontab file after the comments.  The line will include our schedule followed by the command.
+
+cron uses a format for time schedules that may appear unfamiliar but is actually fairly simple. For a full tutorial on how to format cron schedules you can [check out this guide](https://www.hostinger.com/tutorials/cron-job#How-to-Write-Cron-Syntax-Properly).  For now I will stick to a schedule that will run twice a day, everyday.  Using our command above, you would add the following to the end of the crontab file:
+
+`16 */12 * * * ~/.virtualenvs/tap-autopilot/bin/tap-autopilot --config ~/tap-autopilot-config/config.json --catalog ~/tap-autopilot-config/catalog.json --properties ~/tap-autopilot-config/catalog.json --state ~/tap-autopilot-config/state.json | ~/.virtualenvs/target-csv/bin/target-csv`
+
+This will run the tap and export the results to a local .csv file every 12 hours.
+
+This is pretty barebones.  Once you have mastered this you might want to put the command in a bash file, along with some other commands and call that instead using 
+
+`16 */12 * * * bash run-my-tap.sh`
+
+This can be useful, for example to send a slack notification when the run is complete.
+
 If you'd like to build your own tap, read [this post by developer Jeff Huth](https://www.stitchdata.com/blog/how-to-build-a-singer-tap-infographic/).
 
 ---------------------------------------------------
