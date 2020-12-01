@@ -164,8 +164,9 @@ When you start running Ubuntu on a new EC2 instance, you won't have the most rec
 
 These three sequential commands find all out-of-date packages, download the required updates, and install them. You may be prompted to agree to some updates as they use up some of your "hard drive" space in the cloud. This step takes a little while.
 
-It helps to get Pip (the package installer for Python) up to date as well:
+It helps to get Pip (the package installer for Python) up to date as well - just in case you don't have it installed yet, I included the install command:
 
+`$ sudo apt install python-pip`
 `$ pip install --upgrade pip`
 
 Sometimes, we use Git to install the taps and targets we want to use. Git is a distributed version-control system used to collaborate on and share source code. Git may not yet be installed in your environment, so run:
