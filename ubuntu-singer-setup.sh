@@ -28,6 +28,8 @@ pyenv install --list | grep " 3\.[5]"
 pyenv install 3.5.3
 pyenv versions
 
+sudo apt-get install python3-venv
+
 python3 -m pip install pipx 
 pipx ensurepath
 # pipx install tap-autopilot (or whatever tap or target you like)
