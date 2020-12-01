@@ -1,5 +1,5 @@
 # Setting up Ubuntu for Singer.io taps and targets
-# updated 2020-08-03  |  fraser marlow
+# updated 2020-11-30  |  fraser marlow
 
 sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y
 sudo apt install git -y
@@ -22,3 +22,7 @@ exec "$SHELL"
 pyenv install --list | grep " 3\.[5]"
 pyenv install 3.5.3
 pyenv versions
+
+python3 -m pip install pipx 
+pipx ensurepath
+# pipx install tap-autopilot (or whatever tap or target you like)
