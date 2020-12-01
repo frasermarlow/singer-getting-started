@@ -6,7 +6,11 @@ sudo apt install git -y
 sudo apt-get install cron -y
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 sudo apt-get install -y python3-dev libssl-dev
+
+# pip may be installed, but just in case...
+sudo apt install python-pip
 pip install --upgrade pip
+
 sudo apt install -y pylint
 python3 --version
 # returns 'Python 3.6.9'
