@@ -9,6 +9,7 @@ sudo apt-get install -y python3-dev libssl-dev
 
 # pip may be installed, but just in case...
 sudo apt install python-pip
+sudo apt install python3-pip
 pip install --upgrade pip
 
 sudo apt install -y pylint
