@@ -107,7 +107,7 @@ The first time you connect you'll be presented with a warning message along thes
 > ECDSA key fingerprint is SHA256:2y7Vd/v03zQ5vG6q8ejyAPLgDvFYqxYLqhhaS92n+5Y.  
 > Are you sure you want to continue connecting (yes/no)? 
 
-This expected, as the secure connection has never been established before. Simply type in ‘_yes_’ and proceed.
+This is expected, as the secure connection has never been established before. Simply type in ‘_yes_’ and proceed.
 
 **Quick tip for Windows users**: The steps above are great for connecting to your server once. Since you will likely be connecting often, I suggest setting up the command as a shortcut.
 
